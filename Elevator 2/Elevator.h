@@ -7,6 +7,11 @@ protected :
 	bool up;
 	bool stationary;
 	int name;
+	
+	bool goodStatus = true; // NEW
+	int distanceFromRequest; // NEW
+
+
 public: 
 	q_modified ele_up;
 	q_modified ele_down;
@@ -21,12 +26,41 @@ public:
 	bool is_stationary();
 	void up_stops();
 	void down_stops();
+
+	void set_distanceFromRequest(int floor_request_level); // NEW
+	int get_distanceFromRequest(); // NEW
 	
-	
-	
-	
-	
+	bool get_goodStatus(); // NEW
+	void set_goodStatus(bool status); // NEW
+
+
 };
+
+bool Elevator::get_goodStatus()
+{
+	return goodStatus;
+}
+
+void Elevator::set_goodStatus(bool status) // NEW
+{
+	goodStatus = status;
+}
+
+
+void Elevator::set_distanceFromRequest(int floor_request_level) // NEW
+{
+	distanceFromRequest = abs(floor_request_level - level);
+}
+
+
+int Elevator::get_distanceFromRequest() // NEW
+{
+	return distanceFromRequest;
+}
+
+
+
+
 
 void Elevator::set_name(int x)
 {
@@ -58,6 +92,8 @@ bool Elevator::moving_up()
 	return (up == true);
 
 }
+
+
 void Elevator :: set_direction(bool x)
 {
 	up = x;
@@ -79,7 +115,7 @@ void Elevator::up_stops()
 		cout << "\t\t\t\t\t\t\t moving up" << endl;
 		
 		
-		set_level(ele_up.print());
+		//set_level(ele_up.print());
 		
 		set_direction(true);
 		
@@ -91,7 +127,7 @@ void Elevator::down_stops()
 	
 	
 		cout << "\t\t\t\t\t\t\t moving down" << endl;
-		set_level (ele_down.print());
+		//set_level (ele_down.print());
 		set_direction(false);
 		ele_down.pop();
 	
