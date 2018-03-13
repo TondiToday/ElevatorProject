@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{80070FBC-DFBD-4482-8DD7-0085826D9637}</ProjectGuid>
     <RootNamespace>Elevator2</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -82,7 +82,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Linden\Source\Repos\ElevatorProject2\Elevator 2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -104,17 +108,27 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Linden\Source\Repos\ElevatorProject2\Elevator 2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FloorRequests.cpp" />
+    <ClCompile Include="M:\UMKC\UMKC - 2018\UMKC - Spring 2018\CS 303\Project 1\Project_v002-LS\Project1_v002-LS\Project1_v002-LS\User.cpp" />
+    <ClCompile Include="M:\UMKC\UMKC - 2018\UMKC - Spring 2018\CS 303\Project 1\Project_v002-LS\Project1_v002-LS\Project1_v002-LS\userTest.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Elevaator.h" />
+    <ClInclude Include="Elevator.h" />
+    <ClInclude Include="FloorRequests.h" />
+    <ClInclude Include="M:\UMKC\UMKC - 2018\UMKC - Spring 2018\CS 303\Project 1\Project_v002-LS\Project1_v002-LS\Project1_v002-LS\User.h" />
     <ClInclude Include="Modified_q.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

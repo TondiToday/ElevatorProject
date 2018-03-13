@@ -18,12 +18,27 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="M:\UMKC\UMKC - 2018\UMKC - Spring 2018\CS 303\Project 1\Project_v002-LS\Project1_v002-LS\Project1_v002-LS\User.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="M:\UMKC\UMKC - 2018\UMKC - Spring 2018\CS 303\Project 1\Project_v002-LS\Project1_v002-LS\Project1_v002-LS\userTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorRequests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Modified_q.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Elevaator.h">
+    <ClInclude Include="M:\UMKC\UMKC - 2018\UMKC - Spring 2018\CS 303\Project 1\Project_v002-LS\Project1_v002-LS\Project1_v002-LS\User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Elevator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorRequests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
