@@ -2,6 +2,56 @@
 #include "Dispatcher.h"
 #include "Utilities.h"
 
+Elevator* ElevatorWorstCase(vector<Elevator*> elevators, int& direction, int& floor_request)
+{
+	// Create a vector of total distance elevator would need to travel
+	vector<int> Total_Distance(elevators.size());
+	if (direction == DOWN)
+		for (int i = 0; i < elevators.size(); i++)
+		{
+
+			if (elevators[i]->moving_up() == true) // WRONG WAY
+			{
+				Total_Distance[i] = abs(elevators[i]->ele_up.front_value() - elevators[i]->ele_up.back_value())
+					+ abs(elevators[i]->ele_down.back_value() - floor_request);
+			}
+			else if (elevators[i]->get_level() > floor_request) // ALREADY PASSED FLOOR
+			{
+				Total_Distance[i] = abs(elevators[i]->ele_up.front_value() - elevators[i]->ele_up.back_value())
+					+ abs(elevators[i]->ele_down.front_value() - elevators[i]->ele_down.back_value())
+					+ abs(floor_request - elevators[i]->ele_down.back_value());
+			}
+		}
+	if (direction == UP)
+	{
+		for (int i = 0; i <= elevators.size(); i++)
+		{
+			if (elevators[i]->moving_up() == false) // WRONG WAY
+			{
+				Total_Distance[i] = abs(elevators[i]->ele_down.front_value() - elevators[i]->ele_down.back_value())
+					+ abs(elevators[i]->ele_up.front_value() - floor_request);
+			}
+			else if (elevators[i]->get_level() > floor_request) // ALREADY PASSED FLOOR
+			{
+				Total_Distance[i] = abs(elevators[i]->ele_up.front_value() - elevators[i]->ele_up.back_value())
+					+ abs(elevators[i]->ele_down.front_value() - elevators[i]->ele_down.back_value())
+					+ abs(floor_request - elevators[i]->ele_up.front_value());
+			}
+
+		}
+	}
+	// Find index of smallest value 
+	int index = 0;
+
+	for (int i = 1; i < Total_Distance.size(); i++)
+	{
+		if (Total_Distance[i] < Total_Distance[index])
+		{
+			index = i;
+		}
+	}
+	return elevators[index];
+}
 
 void dispatch(vector<Elevator*>& d_elevators, int& direction, int& floor_request)
 {
@@ -119,13 +169,21 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 			if (elevators_with_bad_status == elevators.size())
 			{
 				cout << "All elevators have bad status" << endl;
+				cout << "Decision: Elevator with Shortest Travel Distance" << endl;
+				ElevatorWorstCase(elevators, direction, floor_request);
+			}
+			/*{
+				cout << "All elevators have bad status" << endl;
 				cout << "Decision: Fewest jobs." << endl;
 
 				// find elevator with min jobs
 				int indexOfMinJobs = findMinJobs(elevators, direction);
 
 				return elevators[indexOfMinJobs];
-			}
+
+				//FUNCTION TO FIND THE WORST CASE
+			
+			}*/
 			
 			
 			// Remove elevators marked with a bad status
@@ -184,13 +242,19 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 			if (elevators_with_bad_status == elevators.size())
 			{
 				cout << "All elevators have bad status" << endl;
+				cout << "Decision: Elevator with Shortest Travel Distance" << endl;
+				ElevatorWorstCase(elevators, direction, floor_request);
+			}
+		
+			/*{
+				cout << "All elevators have bad status" << endl;
 				cout << "Decision: Fewest jobs." << endl;
 
 				// find elevator with min jobs
 				int indexOfMinJobs = findMinJobs(elevators, direction);
 
 				return elevators[indexOfMinJobs];
-			}
+			}*/
 
 			// Remove elevators marked a with bad status
 			int number_of_elevators = dismissBadElevators(elevators);
@@ -293,5 +357,6 @@ bool compareDistance(Elevator* elevator1, Elevator* elevator2)
 {
 	return elevator1->get_distanceFromRequest() < elevator2->get_distanceFromRequest();
 }
+
 
 
