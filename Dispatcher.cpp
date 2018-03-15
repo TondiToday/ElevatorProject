@@ -41,16 +41,16 @@ Elevator* ElevatorWorstCase(vector<Elevator*> elevators, int& direction, int& fl
 		}
 	}
 	// Find index of smallest value 
-	int index = 0;
+	int index_WorstCase = 0;
 
 	for (int i = 1; i < Total_Distance.size(); i++)
 	{
-		if (Total_Distance[i] < Total_Distance[index])
+		if (Total_Distance[i] < Total_Distance[index_WorstCase])
 		{
-			index = i;
+			index_WorstCase = i;
 		}
 	}
-	return elevators[index];
+	return elevators[index_WorstCase];
 }
 
 void dispatch(vector<Elevator*>& d_elevators, int& direction, int& floor_request)
