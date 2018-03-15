@@ -19,7 +19,7 @@ Elevator* ElevatorWorstCase(vector<Elevator*> elevators, int& direction, int& fl
 			{
 				Total_Distance[i] = abs(elevators[i]->ele_up.front_value() - elevators[i]->ele_up.back_value())
 					+ abs(elevators[i]->ele_down.front_value() - elevators[i]->ele_down.back_value())
-					+ abs(floor_request - elevators[i]->ele_down.back_value());
+					+ abs(floor_request - elevators[i]->ele_up.front_value());
 			}
 		}
 	if (direction == UP)
@@ -35,7 +35,7 @@ Elevator* ElevatorWorstCase(vector<Elevator*> elevators, int& direction, int& fl
 			{
 				Total_Distance[i] = abs(elevators[i]->ele_up.front_value() - elevators[i]->ele_up.back_value())
 					+ abs(elevators[i]->ele_down.front_value() - elevators[i]->ele_down.back_value())
-					+ abs(floor_request - elevators[i]->ele_up.front_value());
+					+ abs(floor_request - elevators[i]->ele_down.back_value());
 			}
 
 		}
