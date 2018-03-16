@@ -67,8 +67,8 @@ void Elevator::up_stops()
 	{
 		cout << "\t\t moving up" << endl;
 	}
-	if (abs(level - ele_up.front_value() != 1)) {
-		set_level(level + 1);
+	if (abs(get_level() - ele_up.front_value() != 1)) {
+		set_level(get_level() + 1);
 		set_direction(true);
 	}
 	else
@@ -88,8 +88,8 @@ void Elevator::down_stops()
 	{
 		cout << "\t\t moving down" << endl;
 	}
-	if (abs(level - ele_down.front_value() != 1)) {
-		set_level(level - 1);
+	if (abs(get_level() - ele_down.front_value() != 1)) {
+		set_level(get_level() - 1);
 		set_direction(false);
 	}
 	else
