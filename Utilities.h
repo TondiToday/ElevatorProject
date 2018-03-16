@@ -9,7 +9,7 @@ extern bool DEBUG; // global debug variable
 void setDebug(); // set whether debug statements are displayed
 
 const int userInputToConstant(int user_input);
-void printElevatorStatus(Elevator* elevator_obj, int direction);
+void printElevatorStatus(Elevator*& elevator_obj, int direction);
 void printUserStatus(vector<User*>& users_vector);
 
 void deleteVector(vector<Elevator*>);

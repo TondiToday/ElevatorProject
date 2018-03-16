@@ -68,6 +68,7 @@ int* floorRequest(const int& number_of_floors)
 	// Add to array
 	newFloorRequest[DIRECTION] = floorDirection;
 	newFloorRequest[FLOOR_REQUEST] = floorNumber;
+	//newFloorRequest[DIRECTION] = 0;
 
 	return newFloorRequest;
 }

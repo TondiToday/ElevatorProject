@@ -3,10 +3,8 @@
 
 #include "Elevator.h"
 
-void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_users);
-
+void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& request_direction, int& total_users);
 void calculateDistance(vector<Elevator*>& elevators, int task);
-
 
 
 #endif

@@ -76,7 +76,7 @@ void deleteVector(vector<User*> discarded_users)
 }
 
 
-void printElevatorStatus(Elevator* elevator_obj, int direction)
+void printElevatorStatus(Elevator*& elevator_obj, int direction)
 {
 	if (DEBUG == YES)
 	{
@@ -97,10 +97,8 @@ void printElevatorStatus(Elevator* elevator_obj, int direction)
 			cout << "WARNING: Elevator is going the wrong direction!" << endl;
 		}
 	}
-	
+
 }
-
-
 
 void printUserStatus(vector<User*>& users_vector)
 {

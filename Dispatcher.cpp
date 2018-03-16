@@ -7,30 +7,29 @@
 void dispatch(vector<Elevator*>& d_elevators, int& direction, int& floor_request)
 {
 	// assign job to elevator
-	Elevator* placeholder = new Elevator(-1);
-	placeholder = findBestElevator(d_elevators, direction, floor_request);
+	Elevator* placeholder = new Elevator(-1); //= new Elevator(-1);
+	placeholder = &(*findBestElevator(d_elevators, direction, floor_request));
 
+	
 	int index_of_selected_elevator = placeholder->get_name();
 
-	//if (DEBUG == YES)
-	//{
-	//	cout << "Best elevator: " << placeholder->get_name() << endl;
-	//}
 
 	printElevatorStatus(placeholder, direction);
-
-
+	
 	if (direction == 0)
 	{
+		cout << "Event 1 in progress." << endl;
 		d_elevators[index_of_selected_elevator]->ele_down.push_down(floor_request);
 	}
 
 	else if (direction == 1)
 	{
+		cout << "Event 2 in progress." << endl;
 		d_elevators[index_of_selected_elevator]->ele_up.push_up(floor_request);
 	}
-
-
+	
+	// reset all elevators to have a good status
+	resetElevatorStatus(d_elevators);
 }
 
 // remove bad elevators 
@@ -147,7 +146,10 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 					cout << "All elevators have bad status" << endl;
 					cout << "Decision: Elevator with shortest travel distance" << endl;
 				}
-				ElevatorWorstCase(elevators, direction, floor_request);
+
+				Elevator* temp = new Elevator(-1);
+				temp = ElevatorWorstCase(elevators, direction, floor_request);
+				return temp;
 			}
 
 
@@ -224,8 +226,10 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 					cout << "All elevators have bad status" << endl;
 					cout << "Decision: Elevator with shortest travel distance" << endl;
 				}
-				
-				ElevatorWorstCase(elevators, direction, floor_request);
+
+				Elevator* temp = new Elevator(-1);
+				temp = ElevatorWorstCase(elevators, direction, floor_request);
+				return temp;
 			}
 
 
@@ -269,7 +273,7 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 }
 
 
-Elevator* ElevatorWorstCase(vector<Elevator*> elevators, int& direction, int& floor_request)
+Elevator* ElevatorWorstCase(vector<Elevator*>& elevators, int& direction, int& floor_request)
 {
 	// Create a vector of total distance elevator would need to travel based on the number of jobs
 	vector<int> Total_Distance(elevators.size());
@@ -291,7 +295,7 @@ Elevator* ElevatorWorstCase(vector<Elevator*> elevators, int& direction, int& fl
 		}
 	if (direction == UP)
 	{
-		for (int i = 0; i <= elevators.size(); i++)
+		for (int i = 0; i < elevators.size(); i++)
 		{
 			if (elevators[i]->moving_up() == false) // WRONG WAY
 			{
@@ -401,3 +405,15 @@ bool compareDistance(Elevator* elevator1, Elevator* elevator2)
 	return elevator1->get_distanceFromRequest() < elevator2->get_distanceFromRequest();
 }
 
+void resetElevatorStatus(vector<Elevator*>& elevators)
+{
+	if (DEBUG == YES)
+	{
+		cout << "Resetting elevators' with good status." << endl;
+	}
+
+	for (int index = 0; index < elevators.size(); index++)
+	{
+		elevators[index]->set_goodStatus(true);
+	}
+}

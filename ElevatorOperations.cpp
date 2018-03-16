@@ -7,52 +7,52 @@
 // not all elevators stops are due to a floor request 
 
 
-int tempCount = 0;
-
-
-void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_users)
+void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& request_direction, int& total_users)
 {
 	vector<Elevator*>::iterator el;
 	for (el = v.begin(); el != v.end(); ++el)
 	{
 
-
-		(*el)->up_stops();
-
-		int currentDirection = (*el)->moving_up();
-
-
 		if ((*el)->ele_up.getsize() != 0)
 		{
-			if (DEBUG == YES)
-			{
-				cout << "\t\t Elevator " << (*el)->get_name() << endl;
-			}
-						
+			cout << "\t\t Elevator " << (*el)->get_name() << endl;
+
+			(*el)->up_stops();
 			//customer_input2((*el)->ele_up, (*el)->ele_down, *(*el));
-			
-			vector<User*> users = generateUsers((*el)->get_level(), currentDirection, number_of_floors, total_users);
+
+			/*START NEW*/
+			vector<User*> users = generateUsers((*el)->get_level(), number_of_floors, total_users);
 			printUserStatus(users);
 
-			if (currentDirection == DOWN)
+			for (int i = 0; i < users.size(); i++)
 			{
-				cout << "*****************************************************EVENT 1" << endl;
-
-				for (int  i = 0; i < users.size(); i++)
+				if (users[i]->get_userDestination() < (*el)->get_level())
 				{
+					cout << "EO Event 1" << endl;
+					cout << "User " << users[i]->get_UserID() << " enters Elevator: " << (*el)->get_name() << endl;
+
 					(*el)->ele_down.push_down(users[i]->get_userDestination());
+
+					cout << "User " << users[i]->get_UserID() << " entered Elevator: " << (*el)->get_name() << endl;
+
 				}
-			}
 
-			else if (currentDirection == UP)
-			{
-				cout << "*****************************************************EVENT 2" << endl;
-
-				for (int i = 0; i < users.size(); i++)
+				else if (users[i]->get_userDestination() > (*el)->get_level())
 				{
+					cout << "EO Event 2" << endl;
+					cout << "User " << users[i]->get_UserID() << " enters Elevator: " << (*el)->get_name() << endl;
+
 					(*el)->ele_up.push_up(users[i]->get_userDestination());
+
+					cout << "User " << users[i]->get_UserID() << " entered Elevator: " << (*el)->get_name() << endl;
+				}
+				else
+				{
+					cout << "Oops" << endl;
 				}
 			}
+			deleteVector(users);
+			/*END NEW*/
 
 			cout << "\t\t Elevator " << (*el)->get_name() << endl;
 			(*el)->up_stops();
@@ -61,59 +61,54 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				(*el)->down_stops();
 			}
 
-			// Delete users vector (dynamic memory)
-			deleteVector(users);
-
 		}
+
 		if ((*el)->ele_down.getsize() != 0)
 		{
-			if (DEBUG == YES)
-			{
-				cout << "\t\t Elevator " << (*el)->get_name() << endl;
-			}
+
+			cout << "\t\t Elevator " << (*el)->get_name() << endl;
 
 			(*el)->down_stops();
-			
-			vector<User*> users = generateUsers((*el)->get_level(), currentDirection, number_of_floors, total_users);
+			//customer_input2((*el)->ele_up, (*el)->ele_down, *(*el));
+
+			/*START NEW*/
+			vector<User*> users = generateUsers((*el)->get_level(), number_of_floors, total_users);
 			printUserStatus(users);
 
-			if (currentDirection == DOWN)
-			{ 
-				cout << "*****************************************************EVENT 3" << endl;
-				for (int i = 0; i < users.size(); i++)
+			for (int i = 0; i < users.size(); i++)
+			{
+				if (users[i]->get_userDestination() < (*el)->get_level())
 				{
+					cout << "EO Event 3" << endl;
+					cout << "User " << users[i]->get_UserID() << " enters Elevator: " << (*el)->get_name() << endl;
 					(*el)->ele_down.push_down(users[i]->get_userDestination());
+					cout << "User " << users[i]->get_UserID() << " entered Elevator: " << (*el)->get_name() << endl;
 				}
-			}
-
-			else if (currentDirection == UP)
-			{
-				cout << "*****************************************************EVENT 4" << endl;
-
-				for (int i = 0; i < users.size(); i++)
+					
+				else if (users[i]->get_userDestination() >(*el)->get_level())
 				{
+					cout << "EO Event 4" << endl;
+					cout << "User " << users[i]->get_UserID() << " enters Elevator: " << (*el)->get_name() << endl;
 					(*el)->ele_up.push_up(users[i]->get_userDestination());
+					cout << "User " << users[i]->get_UserID() << " entered Elevator: " << (*el)->get_name() << endl;
+
+				}
+				else
+				{
+					cout << "Oops" << endl;
 				}
 			}
+			deleteVector(users);
+			/*END NEW*/
 
-			if (DEBUG == YES)
-			{
-				cout << "\t\t Elevator " << (*el)->get_name() << endl;
-			}
-			
+			cout << "\t\t Elevator " << (*el)->get_name() << endl;
 			(*el)->down_stops();
 			if ((*el)->ele_up.getsize() != 0)
 			{
 				(*el)->up_stops();
 			}
-			
-			// Delete users vector (dynamic memory)
-			deleteVector(users);
-			
 		}
-
 	}
-
 }
 
 void calculateDistance(vector<Elevator*>& elevators, int task)
@@ -130,3 +125,5 @@ void calculateDistance(vector<Elevator*>& elevators, int task)
 		}
 	}
 }
+
+

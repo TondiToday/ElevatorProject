@@ -102,8 +102,7 @@ int main()
 			dispatch(elevators, newTask[DIRECTION], newTask[FLOOR_REQUEST]);
 			totalFloorRequests++;
 		}
-		elevator_op(elevators, FLOORS_NUMBER, totalUsers);
-
+		elevator_op(elevators, FLOORS_NUMBER, newTask[DIRECTION], totalUsers);
 
 
 	}
