@@ -124,22 +124,23 @@ void q_modified::push_down(int x)
 }
 int q_modified::print()
 {
-	
-		int x;
-		node * pr = front;
-		while (pr != NULL)
+	if (!isempty())
+	{
+	int x;
+	node * pr = front;
+	while (pr != NULL)
+	{
+		if (DEBUG == YES)
 		{
-			if (DEBUG == YES)
-			{
-				cout << " \t\t We are on floor  " << pr->data << endl;
-			}
-			x = pr->data;
-			pr = pr->next;
-
-
+			cout << " \t\t We are on floor  " << pr->data << endl;
 		}
-		return x;
+		x = pr->data;
+		pr = pr->next;
 
+
+	}
+	return x;
+}
 	
 
 }
