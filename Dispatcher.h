@@ -18,5 +18,5 @@ bool compareJobsDown(Elevator* elevator1, Elevator* elevator2);
 bool compareDistance(Elevator* elevator1, Elevator* elevator2);
 
 
-
+void resetElevatorStatus(vector<Elevator*>& elevators);
 #endif
