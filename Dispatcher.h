@@ -6,6 +6,7 @@
 
 void dispatch(vector<Elevator*>& elevators, int& direction, int& floor_request);
 Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& floor_request);
+Elevator* ElevatorWorstCase(vector<Elevator*> elevators, int& direction, int& floor_request);
 
 // Sorting
 int findMinJobs(vector<Elevator*>& elevators, int& direction);

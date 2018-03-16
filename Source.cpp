@@ -3,15 +3,23 @@
 #include "FloorRequests.h"
 #include "Dispatcher.h"
 #include "ElevatorOperations.h"
-
 #include <vector>
+#include <ctime>
 
 
 int main()
-{	
+{
+	srand(unsigned(time(0))); // set random seed, need to leave in main
+
 	int userBuildingFloors;// for user inputted number of floors
 	int userElevatorNumber; // for user inputted number of elevators
+	int totalUsers = 0;
+	int totalFloorRequests = 0;
 	vector <Elevator*> elevators;
+
+	setDebug();
+	cout << "Debug statements: " << boolalpha << DEBUG << endl << endl;
+
 	
 	cout << "Please enter the number of floors in the building: ";
 	cin >> userBuildingFloors;
@@ -20,6 +28,7 @@ int main()
 	cout << "Please enter the number of elevators in the building: ";
 	cin >> userElevatorNumber;
 	const int ELEVATORS_NUMBER = userInputToConstant(userElevatorNumber);
+
 
 	for (int i = 0; i < userElevatorNumber; i++)
 	{
@@ -61,8 +70,10 @@ int main()
 	*/
 	//**************************************//
 
-	for (int start = 0; start < 5; start++)
+	for (int start = 0; start < 100; start++)
 	{
+		cout << endl << "ITERATIONS: " << start << endl;
+
 		// Get new floor
 		int* newTaskPtr = floorRequest(FLOORS_NUMBER);
 		int newTask[2]; // array to contain direction and floor number
@@ -70,28 +81,38 @@ int main()
 		newTask[DIRECTION] = *newTaskPtr;
 		newTask[FLOOR_REQUEST] = *(newTaskPtr + 1);
 
-		cout << "Requested Direction: " << newTask[DIRECTION] << endl;
-		cout << "Requested Floor Number: " << newTask[FLOOR_REQUEST] << endl;
-
-		// Calculates elevators' distances from requested floor
-		for (int index = 0; index < elevators.size(); index++)
+		// If no request was made
+		if ((newTask[DIRECTION] == -1) || (newTask[FLOOR_REQUEST] == -1))
 		{
-			elevators[index]->set_distanceFromRequest(newTask[FLOOR_REQUEST]);
+			if (DEBUG == YES)
+			{
+				cout << "No floor request was made." << endl;
+			}
 		}
 
-		dispatch(elevators, newTask[DIRECTION], newTask[FLOOR_REQUEST]);
-		elevator_op(elevators, FLOORS_NUMBER);
+		else
+		{
+			if (DEBUG == YES)
+			{
+				cout << "Requested Direction: " << newTask[DIRECTION] << endl;
+				cout << "Requested Floor Number: " << newTask[FLOOR_REQUEST] << endl;
+			}
+			
+			calculateDistance(elevators, newTask[FLOOR_REQUEST]);
+			dispatch(elevators, newTask[DIRECTION], newTask[FLOOR_REQUEST]);
+			totalFloorRequests++;
+		}
+		elevator_op(elevators, FLOORS_NUMBER, totalUsers);
+
+
+
 	}
-		//int exit;
-		/*
-			//cout << "To EXIT THE SYSTEM PRESS 0" << endl << endl;
-
-			customer_input(dispach_up, dispach_down);
-			dispacher(dispach_up, dispach_down, number_floors, v, n_elevators);
-			elevator_op(v, dispach_up, dispach_down);
-		*/
+	// Delete elevator vector (dynamic memory)
+	deleteVector(elevators);
+	
+	cout << "Total users: " << totalUsers << endl;
 
 
-	system("pause");
+	//system("pause");
 	return 0;
 }

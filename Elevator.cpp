@@ -1,4 +1,5 @@
 #include "Elevator.h"
+#include "Utilities.h"
 
 Elevator::Elevator(int x)
 {
@@ -10,7 +11,6 @@ Elevator::Elevator(int x, const int number_of_floors, const int number_of_elevat
 	set_name(x);
 	// sets the elevators initial level based on number of floors
 	level = x * (number_of_floors / number_of_elevators); 
-	
 }
 
 void Elevator::set_name(int x)
@@ -57,37 +57,43 @@ bool Elevator::is_stationary()
 }
 void Elevator::up_stops()
 {
-	cout << "\t\t\t\t\t\t\t moving up" << endl;
-	//set_level(ele_up.print());
+	if (DEBUG == YES)
+	{
+		cout << "\t\t moving up" << endl;
+	}
+	set_level(ele_up.print());
 	set_direction(true);
 	ele_up.pop();
 
 }
 void Elevator::down_stops()
 {
-	cout << "\t\t\t\t\t\t\t moving down" << endl;
-	//set_level (ele_down.print());
+	if (DEBUG == YES)
+	{
+		cout << "\t\t moving down" << endl;
+	}
+	set_level (ele_down.print());
 	set_direction(false);
 	ele_down.pop();
 
 }
 
-bool Elevator::get_goodStatus() // NEW
+bool Elevator::get_goodStatus()
 {
 	return goodStatus;
 }
 
-void Elevator::set_goodStatus(bool status) // NEW
+void Elevator::set_goodStatus(bool status)
 {
 	goodStatus = status;
 }
 
-void Elevator::set_distanceFromRequest(int floor_request_level) // NEW
+void Elevator::set_distanceFromRequest(int floor_request_level)
 {
 	distanceFromRequest = abs(floor_request_level - level);
 }
 
-int Elevator::get_distanceFromRequest() // NEW
+int Elevator::get_distanceFromRequest()
 {
 	return distanceFromRequest;
 }

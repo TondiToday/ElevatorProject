@@ -1,4 +1,5 @@
 #include "Modified_q.h"
+#include "Utilities.h"
 
 q_modified::q_modified()
 {
@@ -129,7 +130,10 @@ int q_modified::print()
 		node * pr = front;
 		while (pr != NULL)
 		{
-			cout << " \t\t\t\t\t\t\t\t\t We are on floor  " << pr->data << endl;
+			if (DEBUG == YES)
+			{
+				cout << " \t\t We are on floor  " << pr->data << endl;
+			}
 			x = pr->data;
 			pr = pr->next;
 
