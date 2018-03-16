@@ -280,7 +280,7 @@ Elevator* ElevatorWorstCase(vector<Elevator*> elevators, int& direction, int& fl
 			if (elevators[i]->moving_up() == true) // WRONG WAY
 			{
 				Total_Distance[i] = abs(elevators[i]->ele_up.front_value() - elevators[i]->ele_up.back_value())
-					+ abs(elevators[i]->ele_down.back_value() - floor_request);
+					+ abs(elevators[i]->ele_down.front_value() - floor_request);
 			}
 			else if (elevators[i]->get_level() > floor_request) // ALREADY PASSED FLOOR
 			{
@@ -302,7 +302,7 @@ Elevator* ElevatorWorstCase(vector<Elevator*> elevators, int& direction, int& fl
 			{
 				Total_Distance[i] = abs(elevators[i]->ele_up.front_value() - elevators[i]->ele_up.back_value())
 					+ abs(elevators[i]->ele_down.front_value() - elevators[i]->ele_down.back_value())
-					+ abs(floor_request - elevators[i]->ele_down.back_value());
+					+ abs(floor_request - elevators[i]->ele_down.front_value());
 			}
 
 		}

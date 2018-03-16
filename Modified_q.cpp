@@ -124,8 +124,7 @@ void q_modified::push_down(int x)
 }
 int q_modified::print()
 {
-	if (!isempty())
-	{
+	
 		int x;
 		node * pr = front;
 		while (pr != NULL)
@@ -141,7 +140,7 @@ int q_modified::print()
 		}
 		return x;
 
-	}
+	
 
 }
 void q_modified::pop()
