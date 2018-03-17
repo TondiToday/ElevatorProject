@@ -110,9 +110,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 }
 */
 
-
-
-	vector<Elevator*>::iterator el;
+vector<Elevator*>::iterator el;
 	for (el = v.begin(); el != v.end(); ++el)
 	{
 		//(*el)->up_stops();

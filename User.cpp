@@ -39,7 +39,7 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 	return userDestination;
 }
 
-	// TEMP
+	// TEMP Overloaded
 	int User::generateUserRequests(int& current_floor, const int& number_of_floors)
 	{
 		int userDestination;
@@ -73,7 +73,7 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 }
 
 
- // TEMP 
+ // TEMP Overloaded
  vector<User*> generateUsers(int current_floor, const int& number_of_floors, int& user_number)
  {
 	 int numberOfRequests = 1 + rand() % 10; // 1 to 10 requests
