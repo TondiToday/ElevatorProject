@@ -34,8 +34,17 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 		//(*el)->up_stops();
 
+		
+		if ((*el)->get_level() == 0) {
+			(*el)->set_direction(true);
+			cout << "Elevator  " << (*el)->get_name() << "  Direction is  " << (*el)->moving_up() << endl;
+		}
+		else if ((*el)->get_level() == number_of_floors) {
+			(*el)->set_direction(false);
+			cout << "Elevator  " << (*el)->get_name() << "  Direction is  " << (*el)->moving_up() << endl;
+		}
+		else {};
 		int currentDirection = (*el)->moving_up();
-
 		if (DEBUG == YES)
 		{
 			cout << "\t\t Elevator " << (*el)->get_name() << endl;
