@@ -16,13 +16,14 @@ void dispatch(vector<Elevator*>& d_elevators, int& direction, int& floor_request
 
 	printElevatorStatus(placeholder, direction);
 	
-	if (direction == DOWN)
+	if (floor_request < d_elevators[index_of_selected_elevator]->get_level())
 	{
 		cout << "Event 1 in progress." << endl;
+		
 		d_elevators[index_of_selected_elevator]->ele_down.push_down(floor_request);
 	}
 
-	else if (direction == UP)
+	else if (floor_request > d_elevators[index_of_selected_elevator]->get_level())
 	{
 		cout << "Event 2 in progress." << endl;
 		d_elevators[index_of_selected_elevator]->ele_up.push_up(floor_request);
@@ -115,7 +116,7 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 			{
 				// mark elevator for removal if it's going in the wrong direction or has already passed the floor request
 
-				if (elevators[index]->moving_up() == true) // WRONG WAY
+				if (elevators[index]->moving_up() == true && elevators[index]->is_stationary() == false) // WRONG WAY
 				{
 					if (DEBUG == YES)
 					{
@@ -125,7 +126,7 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 					elevators[index]->set_goodStatus(false);
 					elevators_with_bad_status++;
 				}
-				else if (elevators[index]->get_level() < floor_request) // ALREADY PASSED FLOOR
+				else if (elevators[index]->get_level() < floor_request && elevators[index]->moving_up() == direction) // ALREADY PASSED FLOOR
 				{
 					if (DEBUG == YES)
 					{
@@ -195,7 +196,7 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 			{
 				// mark elevator for removal if it's going in the wrong direction or has already passed the floor request
 
-				if (elevators[index]->moving_up() == false) // WRONG WAY
+				if (elevators[index]->moving_up() == false && elevators[index]->is_stationary() == false) // WRONG WAY
 				{
 					if (DEBUG == YES)
 					{
@@ -206,7 +207,7 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 					elevators[index]->set_goodStatus(false);
 					elevators_with_bad_status++;
 				}
-				else if (elevators[index]->get_level() > floor_request) // ALREADY PASSED FLOOR
+				else if (elevators[index]->get_level() > floor_request && elevators[index]->moving_up() == direction) // ALREADY PASSED FLOOR
 				{
 					if (DEBUG == YES)
 					{
@@ -286,7 +287,7 @@ Elevator* ElevatorWorstCase(vector<Elevator*>& elevators, int& direction, int& f
 			if (elevators[i]->moving_up() == true) // WRONG WAY
 			{
 				Total_Distance[i] = abs(elevators[i]->ele_up.front_value() - elevators[i]->ele_up.back_value())
-					+ abs(elevators[i]->ele_down.back_value() - floor_request);
+					+ abs(elevators[i]->ele_down.front_value() - floor_request);
 			}
 			else if (elevators[i]->get_level() > floor_request) // ALREADY PASSED FLOOR
 			{
@@ -308,7 +309,7 @@ Elevator* ElevatorWorstCase(vector<Elevator*>& elevators, int& direction, int& f
 			{
 				Total_Distance[i] = abs(elevators[i]->ele_up.front_value() - elevators[i]->ele_up.back_value())
 					+ abs(elevators[i]->ele_down.front_value() - elevators[i]->ele_down.back_value())
-					+ abs(floor_request - elevators[i]->ele_down.back_value());
+					+ abs(floor_request - elevators[i]->ele_down.front_value());
 			}
 
 		}

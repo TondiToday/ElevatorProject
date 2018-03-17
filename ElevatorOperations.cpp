@@ -115,14 +115,20 @@ vector<Elevator*>::iterator el;
 	{
 		//(*el)->up_stops();
 
-		int currentDirection = (*el)->moving_up();
-
+		
 		if (DEBUG == YES)
 		{
 			cout << "\t\t Elevator " << (*el)->get_name() << endl;
 		};
-		if ( (*el)->get_distanceFromRequest() == 0) 
-	{
+		if ((*el)->get_level() == 0) {
+			(*el)->set_direction(true);
+		}
+		else if ((*el)->get_level() == number_of_floors) {
+			(*el)->set_direction(false);
+		}
+		else {};
+		int currentDirection = (*el)->moving_up();
+		if ( (*el)->get_distanceFromRequest() == 0) {/*
 
 
 			//customer_input2((*el)->ele_up, (*el)->ele_down, *(*el));
@@ -168,7 +174,7 @@ vector<Elevator*>::iterator el;
 
 
 			// Delete users vector (dynamic memory)
-			deleteVector(users);
+			deleteVector(users);*/
 
 		}
 
@@ -183,13 +189,19 @@ vector<Elevator*>::iterator el;
 			(*el)->up_stops();
 			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 		}
-		else if ((*el)->ele_down.getsize() == 0) {
+		else if ((*el)->ele_up.getsize() != 0 && (*el)->moving_up() == true) {
 			(*el)->up_stops();
 			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 		}
-		else if ((*el)->ele_up.getsize() == 0) {
+		else if ((*el)->ele_down.getsize() != 0 && (*el)->moving_up() == false) {
 			(*el)->down_stops();
 			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+		}
+		else if ((*el)->ele_up.getsize() != 0 && (*el)->moving_up() == false) {
+			(*el)->set_direction(true);
+		}
+		else if ((*el)->ele_down.getsize() != 0 && (*el)->moving_up() == true){
+			(*el)->set_direction(false);
 		}
 		else { cout << "Nothing happend " << endl; }
 	}

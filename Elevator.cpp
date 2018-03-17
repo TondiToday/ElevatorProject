@@ -71,7 +71,7 @@ void Elevator::up_stops()
 		cout << get_level() << "   " << ele_up.front_value() << endl;
 	}
 	int new_level = abs(abs(get_level()) + 1);
-	if (abs(get_level() - ele_up.front_value() != 1)) {
+	if (abs(get_level() - ele_up.front_value()) != 1) {
 		set_level(new_level);
 		set_direction(true);
 	}
@@ -104,7 +104,7 @@ void Elevator::down_stops()
 		cout << get_level() << "   " << ele_down.front_value() << endl;
 	}
 	int new_level = abs(abs(get_level()) - 1);
-	if (abs(get_level() - ele_down.front_value() != 1)) {
+	if (abs(get_level() - ele_down.front_value()) != 1) {
 		set_level(new_level);
 		set_direction(false);
 	}

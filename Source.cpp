@@ -104,7 +104,7 @@ int main()
 		}
 		elevator_op(elevators, FLOORS_NUMBER, totalUsers);
 
-
+		system("pause");
 	}
 	// Delete elevator vector (dynamic memory)
 	deleteVector(elevators);
@@ -112,6 +112,5 @@ int main()
 	cout << "Total users: " << totalUsers << endl;
 
 
-	//system("pause");
 	return 0;
 }
