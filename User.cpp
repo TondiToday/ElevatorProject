@@ -32,7 +32,7 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 	int User::generateUserRequests(int& current_floor, const int& number_of_floors)
 	{
 		int userDestination;
-
+		
 		if ((current_floor - 1) == 0)
 		{
 			int zeroFix = 1;
@@ -43,9 +43,6 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 			return userDestination = (rand() % (current_floor - 1) + 1);
 		}
 	}
-
-
-
 
 
 // Creates a vector of User objects to be passed to the elevator's list

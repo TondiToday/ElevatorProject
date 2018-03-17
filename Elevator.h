@@ -6,7 +6,7 @@
 
 class Elevator 
 {
-protected :
+private :
 	int level;
 	bool up;
 	bool stationary = true;

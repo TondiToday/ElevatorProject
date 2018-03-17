@@ -26,29 +26,26 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& request
 
 			for (int i = 0; i < users.size(); i++)
 			{
-				if (users[i]->get_userDestination() < (*el)->get_level())
+				if (users[i]->get_userDestination() <= (*el)->get_level())
 				{
 					cout << "EO Event 1" << endl;
-					cout << "User " << users[i]->get_UserID() << " enters Elevator: " << (*el)->get_name() << endl;
-
 					(*el)->ele_down.push_down(users[i]->get_userDestination());
-
-					cout << "User " << users[i]->get_UserID() << " entered Elevator: " << (*el)->get_name() << endl;
-
+					
+					if (DEBUG == YES)
+					{
+						cout << "User " << users[i]->get_UserID() << " entered Elevator " << (*el)->get_name() << endl;
+					}
 				}
 
-				else if (users[i]->get_userDestination() > (*el)->get_level())
+				else if (users[i]->get_userDestination() >= (*el)->get_level())
 				{
 					cout << "EO Event 2" << endl;
-					cout << "User " << users[i]->get_UserID() << " enters Elevator: " << (*el)->get_name() << endl;
-
 					(*el)->ele_up.push_up(users[i]->get_userDestination());
-
-					cout << "User " << users[i]->get_UserID() << " entered Elevator: " << (*el)->get_name() << endl;
-				}
-				else
-				{
-					cout << "Oops" << endl;
+					
+					if (DEBUG == YES)
+					{
+						cout << "User " << users[i]->get_UserID() << " entered Elevator " << (*el)->get_name() << endl;
+					}
 				}
 			}
 			deleteVector(users);
@@ -77,25 +74,26 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& request
 
 			for (int i = 0; i < users.size(); i++)
 			{
-				if (users[i]->get_userDestination() < (*el)->get_level())
+				if (users[i]->get_userDestination() <= (*el)->get_level())
 				{
 					cout << "EO Event 3" << endl;
-					cout << "User " << users[i]->get_UserID() << " enters Elevator: " << (*el)->get_name() << endl;
 					(*el)->ele_down.push_down(users[i]->get_userDestination());
-					cout << "User " << users[i]->get_UserID() << " entered Elevator: " << (*el)->get_name() << endl;
+					
+					if (DEBUG == YES)
+					{
+						cout << "User " << users[i]->get_UserID() << " entered Elevator " << (*el)->get_name() << endl;
+					}
 				}
 					
-				else if (users[i]->get_userDestination() >(*el)->get_level())
+				else if (users[i]->get_userDestination() >= (*el)->get_level())
 				{
 					cout << "EO Event 4" << endl;
-					cout << "User " << users[i]->get_UserID() << " enters Elevator: " << (*el)->get_name() << endl;
 					(*el)->ele_up.push_up(users[i]->get_userDestination());
-					cout << "User " << users[i]->get_UserID() << " entered Elevator: " << (*el)->get_name() << endl;
-
-				}
-				else
-				{
-					cout << "Oops" << endl;
+					
+					if (DEBUG == YES)
+					{
+						cout << "User " << users[i]->get_UserID() << " entered Elevator " << (*el)->get_name() << endl;
+					}
 				}
 			}
 			deleteVector(users);

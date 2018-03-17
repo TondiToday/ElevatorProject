@@ -147,9 +147,10 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 					cout << "Decision: Elevator with shortest travel distance" << endl;
 				}
 
-				Elevator* temp = new Elevator(-1);
-				temp = ElevatorWorstCase(elevators, direction, floor_request);
-				return temp;
+				//Elevator* temp = new Elevator(-1);
+				//temp = ElevatorWorstCase(elevators, direction, floor_request);
+				//return temp;
+				return ElevatorWorstCase(elevators, direction, floor_request);
 			}
 
 
@@ -227,9 +228,10 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 					cout << "Decision: Elevator with shortest travel distance" << endl;
 				}
 
-				Elevator* temp = new Elevator(-1);
+				/*Elevator* temp = new Elevator(-1);
 				temp = ElevatorWorstCase(elevators, direction, floor_request);
-				return temp;
+				return temp;*/
+				return ElevatorWorstCase(elevators, direction, floor_request);
 			}
 
 

@@ -70,7 +70,6 @@ void q_modified::push_up(int x)
 }
 void q_modified::push_down(int x)
 {
-
 	if (isempty())
 	{
 		front = new node(x, NULL);
@@ -99,23 +98,22 @@ void q_modified::push_down(int x)
 		else // to add node between the front and the back node
 		{
 			node * insert = front;
-			while (insert != NULL)
+			while (insert->next != NULL)
 			{
 				if (insert->data == x)
 				{
 					return;
 				}
-				else if (insert->next->data < x)
+
+				else
 				{
 					node *in = new node(x, insert->next);
 					insert->next = in;
 					size++;
 					return;
-
-
 				}
 				insert->next = insert;
-
+				
 			}
 		}
 
