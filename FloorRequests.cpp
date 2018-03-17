@@ -15,8 +15,8 @@ int* floorRequest(const int& number_of_floors)
 	int floorDirection; // 0 = DOWN, 1 = UP
 	int floorNumber;
 	int newFloorRequest[2];
-	//int isRequest = rand() % 2;
-	int isRequest = true;
+	int isRequest = rand() % 2;
+	//int isRequest = true;
 
 	// No floor request was made
 	if (isRequest == NO)

@@ -29,15 +29,19 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 
 		// if the elevator is stationary and has no floor requests
-		if (((*el)->is_stationary() == YES) && (((*el)->floorRequests_down.getsize() == 0) || (*el)->floorRequests_up.getsize() == 0))
+		if ( ((*el)->is_stationary() == YES) && ( ((*el)->floorRequests_down.isempty()) && (*el)->floorRequests_up.isempty() ) )
 		{
 			continue;
 		}
 
 		// if the elevator is moving DOWN and a floor request matches the current floor
 		if ( ((*el)->moving_up() == NO) && ((*el)->floorRequests_down.front_value() == (*el)->get_level())
-			|| 	// if the elevator is now stationary, but it had a DOWN request 
-		 (((*el)->is_stationary() == YES) && ((*el)->floorRequests_down.front_value() == (*el)->get_level())) )
+			
+			&& // AND  if the elevator's UP queue is empty and it's DOWN queue is not empty
+			( ((*el)->ele_up.isempty() == YES) && (*el)->ele_down.isempty() == NO)
+
+			// OR if the elevator is now stationary, but it had a DOWN request 
+			|| (((*el)->is_stationary() == YES) && ((*el)->floorRequests_down.front_value() == (*el)->get_level())) )
 
 		{
 			(*el)->floorRequests_down.pop_front(); // removes request from the queue
@@ -67,8 +71,13 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 		// if the elevator is moving UP and a floor request matches the current floor
 		else if ( (((*el)->moving_up() == YES) && ((*el)->floorRequests_up.front_value() == (*el)->get_level()))
+
+			&& // AND  if the elevator's DOWN queue is empty and it's UP queue is not empty
+			(((*el)->ele_down.isempty() == YES) && (*el)->ele_up.isempty() == NO)
+
 			|| 	// if the elevator is now stationary, but it had an UP request 
 			(((*el)->is_stationary() == YES) && ((*el)->floorRequests_up.front_value() == (*el)->get_level())) )
+
 		{
 			(*el)->floorRequests_up.pop_front(); // removes request from the queue
 			currentDirection = UP;
