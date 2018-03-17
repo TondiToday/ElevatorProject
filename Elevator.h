@@ -37,6 +37,8 @@ public:
 	void set_goodStatus(bool status); 
 	int get_distanceFromRequest(); 
 	void set_distanceFromRequest(int floor_request_level); 
+	int last_floor_down;
+	int last_floor_up;
 
 };
 

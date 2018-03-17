@@ -31,7 +31,7 @@ public:
 
 	
 
-	//int generateUserRequests(int& current_floor, int& current_direction, const int& number_of_floors);
+	int generateUserRequests(int& current_floor, int& current_direction, const int& number_of_floors);
 
 	int generateUserRequests(int& current_floor, const int& number_of_floors);
 
@@ -43,7 +43,7 @@ private :
 	int userDestination;
 };
 
-	//vector<User*> generateUsers(int current_floor, int& current_direction, const int& number_of_floors, int& user_number);
+	vector<User*> generateUsers(int current_floor, int& current_direction, const int& number_of_floors, int& user_number);
 	
 	vector<User*> generateUsers(int current_floor, const int& number_of_floors, int& user_number);
 

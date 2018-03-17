@@ -16,13 +16,13 @@ void dispatch(vector<Elevator*>& d_elevators, int& direction, int& floor_request
 
 	printElevatorStatus(placeholder, direction);
 	
-	if (direction == 0)
+	if (direction == DOWN)
 	{
 		cout << "Event 1 in progress." << endl;
 		d_elevators[index_of_selected_elevator]->ele_down.push_down(floor_request);
 	}
 
-	else if (direction == 1)
+	else if (direction == UP)
 	{
 		cout << "Event 2 in progress." << endl;
 		d_elevators[index_of_selected_elevator]->ele_up.push_up(floor_request);

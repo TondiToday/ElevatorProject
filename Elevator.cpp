@@ -56,7 +56,7 @@ bool Elevator::is_stationary()
 		return false;
 }
 void Elevator::up_stops()
-{
+{/*
 	if (DEBUG == YES)
 	{
 		cout << "\t\t moving up" << endl;
@@ -64,10 +64,32 @@ void Elevator::up_stops()
 	set_level(ele_up.print());
 	set_direction(true);
 	ele_up.pop();
+*/
+	if (DEBUG == YES)
+	{
+		cout << "\t\t moving up" << endl;
+		cout << get_level() << "   " << ele_up.front_value() << endl;
+	}
+	int new_level = abs(abs(get_level()) + 1);
+	if (abs(get_level() - ele_up.front_value() != 1)) {
+		set_level(new_level);
+		set_direction(true);
+	}
+	else
+	{
+
+		set_level(ele_up.front_value());
+		last_floor_up = ele_up.front_value();
+		set_direction(true);
+		ele_up.pop_front();
+	}
+
+
 
 }
 void Elevator::down_stops()
 {
+	/*
 	if (DEBUG == YES)
 	{
 		cout << "\t\t moving down" << endl;
@@ -75,6 +97,26 @@ void Elevator::down_stops()
 	set_level (ele_down.print());
 	set_direction(false);
 	ele_down.pop();
+	*/
+	if (DEBUG == YES)
+	{
+		cout << "\t\t moving down" << endl;
+		cout << get_level() << "   " << ele_down.front_value() << endl;
+	}
+	int new_level = abs(abs(get_level()) - 1);
+	if (abs(get_level() - ele_down.front_value() != 1)) {
+		set_level(new_level);
+		set_direction(false);
+	}
+	else
+	{
+
+		set_level(ele_down.front_value());
+		last_floor_down = ele_down.front_value();
+		set_direction(false);
+		ele_down.pop_front();
+	}
+
 
 }
 
