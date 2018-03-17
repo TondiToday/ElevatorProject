@@ -10,7 +10,7 @@ Elevator::Elevator(int x, const int number_of_floors, const int number_of_elevat
 {
 	set_name(x);
 	// sets the elevators initial level based on number of floors
-	level = x * (number_of_floors / number_of_elevators); 
+	level = x * (number_of_floors / number_of_elevators);
 }
 
 void Elevator::set_name(int x)
@@ -57,21 +57,21 @@ bool Elevator::is_stationary()
 }
 void Elevator::up_stops()
 {/*
-	if (DEBUG == YES)
-	{
-		cout << "\t\t moving up" << endl;
-	}
-	set_level(ele_up.print());
-	set_direction(true);
-	ele_up.pop();
-*/
+ if (DEBUG == YES)
+ {
+ cout << "\t\t moving up" << endl;
+ }
+ set_level(ele_up.print());
+ set_direction(true);
+ ele_up.pop();
+ */
 	if (DEBUG == YES)
 	{
 		cout << "\t\t moving up" << endl;
 		cout << get_level() << "   " << ele_up.front_value() << endl;
 	}
 	int new_level = abs(abs(get_level()) + 1);
-	if (abs(get_level() - ele_up.front_value() != 1)) {
+	if (abs(get_level() - ele_up.front_value()) != 1) {
 		set_level(new_level);
 		set_direction(true);
 	}
@@ -92,7 +92,7 @@ void Elevator::down_stops()
 	/*
 	if (DEBUG == YES)
 	{
-		cout << "\t\t moving down" << endl;
+	cout << "\t\t moving down" << endl;
 	}
 	set_level (ele_down.print());
 	set_direction(false);
@@ -104,7 +104,7 @@ void Elevator::down_stops()
 		cout << get_level() << "   " << ele_down.front_value() << endl;
 	}
 	int new_level = abs(abs(get_level()) - 1);
-	if (abs(get_level() - ele_down.front_value() != 1)) {
+	if (abs(get_level() - ele_down.front_value()) != 1) {
 		set_level(new_level);
 		set_direction(false);
 	}

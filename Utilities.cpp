@@ -115,3 +115,15 @@ void printUserStatus(vector<User*>& users_vector)
 
 
 
+int randomFloor(int max, int min)
+{
+	if ((max - min + 1) == 0)
+	{
+		int zeroFix = 1;
+		return rand() % (zeroFix) + min;
+	}
+	else
+	{
+		return rand() % (max - min + 1) + min;
+	}
+}

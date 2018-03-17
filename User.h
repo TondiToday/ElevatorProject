@@ -10,9 +10,9 @@ class User {
 
 public:
 // Constructor
-	User(int& current_floor, /*int& current_direction,*/ const int& number_of_floors, int& user_number) {
+	User(int& current_floor, int& current_direction, const int& number_of_floors, int& user_number) {
 		userFloor = current_floor;
-		userDestination = generateUserRequests(current_floor, /*current_direction,*/ number_of_floors);
+		userDestination = generateUserRequests(current_floor, current_direction, number_of_floors);
 		userID = user_number;
 	}
 
@@ -33,7 +33,6 @@ public:
 
 	int generateUserRequests(int& current_floor, int& current_direction, const int& number_of_floors);
 
-	int generateUserRequests(int& current_floor, const int& number_of_floors);
 
 
 	
@@ -45,7 +44,6 @@ private :
 
 	vector<User*> generateUsers(int current_floor, int& current_direction, const int& number_of_floors, int& user_number);
 	
-	vector<User*> generateUsers(int current_floor, const int& number_of_floors, int& user_number);
 
 
 

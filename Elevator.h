@@ -21,8 +21,12 @@ public:
 	Elevator(int x, const int userBuildingFloors, const int userElevatorNumber);
 	Elevator(int x);
 
-	q_modified ele_up;
-	q_modified ele_down;
+	q_modified ele_up;   // both floor requests and user requests
+	q_modified ele_down; // both floor requests and user requests
+
+	q_modified floorRequests_up;   // only floor requests sent by the dispatcher
+	q_modified floorRequests_down; // only floor requests sent by the dispatcher
+
 	void set_name(int i);
 	int get_name();
 	void set_level(int x);

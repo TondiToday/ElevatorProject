@@ -167,6 +167,7 @@ int q_modified::front_value()
 		return front->data;
 	}
 	if (isempty())
+	if (isempty())
 	{
 		return 0;
 	}

@@ -7,13 +7,16 @@ floorRequest generates a random floor request and a direction
 			 and returns a pointer to a 2-index array
 */
 
+
+
+
 int* floorRequest(const int& number_of_floors)
 {	
 	int floorDirection; // 0 = DOWN, 1 = UP
 	int floorNumber;
 	int newFloorRequest[2];
-	int isRequest = rand() % 2;
-	//int isRequest = true;
+	//int isRequest = rand() % 2;
+	int isRequest = true;
 
 	// No floor request was made
 	if (isRequest == NO)
@@ -41,27 +44,22 @@ int* floorRequest(const int& number_of_floors)
 		else
 		{
 			// generates floor direction, down or up (0 or 1)
-			floorDirection = rand() % 2;
+			//floorDirection = rand() % 2;
+			floorDirection = randomFloor(1, 0);
 		}
 
-		if (floorDirection == DOWN) {
+		if (floorDirection == DOWN) 
+		{
 			// generates floor requests from below current floor to bottom floor
-			
-			// fixes divide by zero errors if current level is 1
-			if ((currentFloor - 1) == 0)
-			{
-				int zeroFix = 1;
-				floorNumber = (rand() % (zeroFix) + 1);
-			}
-			else
-			{
-				floorNumber = (rand() % (currentFloor - 1) + 1);
-			}
+
+			floorNumber = randomFloor(currentFloor - 1, 0);
 		}
 
-		else if (floorDirection == UP) {
+
+		else if (floorDirection == UP) 
+		{
 			// generates floor requests from above current floor to top floor
-			floorNumber = (rand() % (number_of_floors - currentFloor + 1) + currentFloor);
+			floorNumber = randomFloor(number_of_floors - currentFloor, currentFloor + 1);
 		}
 	}
 

@@ -22,6 +22,7 @@ enum Direction { DOWN = 0, UP = 1 };
 enum Answer { NO = 0, YES = 1 };
 
 
+int randomFloor(int max, int min);
 
 
 
