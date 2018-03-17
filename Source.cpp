@@ -104,7 +104,7 @@ int main()
 		}
 		elevator_op(elevators, FLOORS_NUMBER, totalUsers);
 
-		//system("pause");
+		system("pause");
 	}
 	// Delete elevator vector (dynamic memory)
 	deleteVector(elevators);

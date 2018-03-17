@@ -116,7 +116,7 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 			{
 				// mark elevator for removal if it's going in the wrong direction or has already passed the floor request
 
-				if (elevators[index]->moving_up() == true && elevators[index]->is_stationary() == false) // WRONG WAY
+				if (elevators[index]->moving_up() == true && elevators[index]->is_stationary() == false && elevators[index]->get_level() != floor_request) // WRONG WAY
 				{
 					if (DEBUG == YES)
 					{
@@ -126,7 +126,7 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 					elevators[index]->set_goodStatus(false);
 					elevators_with_bad_status++;
 				}
-				else if (elevators[index]->get_level() < floor_request && elevators[index]->moving_up() == direction) // ALREADY PASSED FLOOR
+				else if (elevators[index]->get_level() < floor_request && elevators[index]->moving_up() == direction && elevators[index]->get_level() != floor_request) // ALREADY PASSED FLOOR
 				{
 					if (DEBUG == YES)
 					{
@@ -196,7 +196,7 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 			{
 				// mark elevator for removal if it's going in the wrong direction or has already passed the floor request
 
-				if (elevators[index]->moving_up() == false && elevators[index]->is_stationary() == false) // WRONG WAY
+				if (elevators[index]->moving_up() == false && elevators[index]->is_stationary() == false && elevators[index]->get_level() != floor_request) // WRONG WAY
 				{
 					if (DEBUG == YES)
 					{
@@ -207,7 +207,7 @@ Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& flo
 					elevators[index]->set_goodStatus(false);
 					elevators_with_bad_status++;
 				}
-				else if (elevators[index]->get_level() > floor_request && elevators[index]->moving_up() == direction) // ALREADY PASSED FLOOR
+				else if (elevators[index]->get_level() > floor_request && elevators[index]->moving_up() == direction && elevators[index]->get_level() != floor_request) // ALREADY PASSED FLOOR
 				{
 					if (DEBUG == YES)
 					{
