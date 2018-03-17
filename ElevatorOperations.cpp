@@ -101,11 +101,11 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			(*el)->up_stops();
 			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 		}
-		else if ((*el)->moving_up() == true){
+		else if ((*el)->ele_down.getsize() == 0){
 			(*el)->up_stops();
 			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 		}
-		else if ((*el)->moving_up() == false) {
+		else if ((*el)->ele_up.getsize() == 0) {
 			(*el)->down_stops();
 			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 		}

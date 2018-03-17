@@ -14,7 +14,6 @@ Elevator::Elevator(int x, const int number_of_floors, const int number_of_elevat
 	last_floor_down = level;
 	last_floor_up = level;
 
-
 }
 
 void Elevator::set_name(int x)
