@@ -9,11 +9,4 @@ void simulation(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int
 
 
 
-
-
-
-
-
-
-
 #endif

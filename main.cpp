@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-	/*
+	
 	// OLD Easier Testing
 	int userBuildingFloors;// for user inputted number of floors
 	int userElevatorNumber; // for user inputted number of elevators
@@ -18,6 +18,7 @@ int main()
 	int totalFloorRequests = 0;
 	vector <Elevator*> elevators;
 	vector<int> userWaitingTimes;
+	const int SIM_TIME = 1000;
 
 	setDebug();
 	cout << "Debug statements: " << boolalpha << DEBUG << endl << endl;
@@ -31,17 +32,18 @@ int main()
 	cin >> userElevatorNumber;
 	const int ELEVATORS_NUMBER = userInputToConstant(userElevatorNumber);
 	// OLD Easier Testing
-	*/
 	
-
+	
+	/*
 	setDebug();
 	const int FLOORS_NUMBER = setFloorNumbers();
 	const int ELEVATORS_NUMBER = setElevatorNumbers(FLOORS_NUMBER);
 	const int SIM_TIME = setSimTime(FLOORS_NUMBER, ELEVATORS_NUMBER);
 	
 	simulation(FLOORS_NUMBER, ELEVATORS_NUMBER, SIM_TIME);
+	*/
 
-
+	simulation(FLOORS_NUMBER, ELEVATORS_NUMBER, SIM_TIME);
 
 
 
