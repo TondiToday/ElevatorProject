@@ -34,13 +34,13 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 		}
 
 		// if the elevator is moving DOWN, and a floor request matches the current floor
-		if (  ( ((*el)->moving_up() == NO) && ((*el)->ele_down.front_value()[FLOOR] == (*el)->get_level()) )
+		if (  ( ((*el)->moving_up() == NO) && ((*el)->last_floor_down == (*el)->get_level()) )
 			
 			// OR if the elevator's UP queue is empty and it's DOWN queue is not empty, and a floor request matches the current floor
-			|| ( ( ((*el)->ele_up.isempty() == YES) && (*el)->ele_down.isempty() == NO ) && ((*el)->ele_down.front_value()[FLOOR] == (*el)->get_level()) )
+			|| ( ( ((*el)->ele_up.isempty() == YES) && (*el)->ele_down.isempty() == NO ) && ((*el)->last_floor_up == (*el)->get_level()) )
 
 			// OR if the elevator is now stationary, but it had a DOWN request, and a floor request matches the current floor
-			|| ( ((*el)->is_stationary() == YES) && ((*el)->ele_down.front_value()[FLOOR] == (*el)->get_level()) )  )
+			|| ( ((*el)->is_stationary() == YES) && ((*el)->last_floor_down == (*el)->get_level()) )  )
 
 		{
 			if (DEBUG == YES)
@@ -85,13 +85,13 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 		}
 
 		// if the elevator is moving UP and a floor request matches the current floor
-		else if (  ( ((*el)->moving_up() == YES) && ((*el)->ele_up.front_value()[FLOOR] == (*el)->get_level()) )
+		else if (  ( ((*el)->moving_up() == YES) && ((*el)->last_floor_up == (*el)->get_level()) )
 
 			|| // OR  if the elevator's DOWN queue is empty and it's UP queue is not empty, and a floor request matches the current floor
-			( ( ((*el)->ele_down.isempty() == YES) && (*el)->ele_up.isempty() == NO ) && ((*el)->ele_up.front_value()[FLOOR] == (*el)->get_level()) )
+			( ( ((*el)->ele_down.isempty() == YES) && (*el)->ele_up.isempty() == NO ) && ((*el)->last_floor_up == (*el)->get_level()) )
 
 			|| // OR  if the elevator is now stationary, but it had an UP request 
-			( ((*el)->is_stationary() == YES) && ((*el)->ele_up.front_value()[FLOOR] == (*el)->get_level()) )  )
+			( ((*el)->is_stationary() == YES) && ((*el)->last_floor_up == (*el)->get_level()) )  )
 
 		{
 			if (DEBUG == YES)
