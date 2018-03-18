@@ -127,3 +127,15 @@ int randomFloor(int max, int min)
 		return rand() % (max - min + 1) + min;
 	}
 }
+
+double averageWaitingTime(vector<int>& waiting_times, int& total_users)
+{
+	double sum_of_waiting_times = 0;
+
+	for (int i = 0; i < waiting_times.size(); i++)
+	{
+		sum_of_waiting_times += waiting_times[i];
+	}
+	return sum_of_waiting_times / total_users;
+}
+

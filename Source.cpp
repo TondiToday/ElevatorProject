@@ -16,6 +16,7 @@ int main()
 	int totalUsers = 0;
 	int totalFloorRequests = 0;
 	vector <Elevator*> elevators;
+	vector<int> userWaitingTimes;
 
 	setDebug();
 	cout << "Debug statements: " << boolalpha << DEBUG << endl << endl;
@@ -38,7 +39,7 @@ int main()
 	
 	
 
-	for (int currentTime = 0; currentTime < 1000; currentTime++)
+	for (int currentTime = 0; currentTime < 100; currentTime++)
 	{
 		cout << endl << "ITERATIONS: " << currentTime << endl;
 
@@ -70,7 +71,7 @@ int main()
 			dispatch(elevators, newTask[DIRECTION_REQUEST], newTask[FLOOR_REQUEST], currentTime);
 			totalFloorRequests++;
 		}
-		elevator_op(elevators, FLOORS_NUMBER, totalUsers, currentTime);
+		elevator_op(elevators, FLOORS_NUMBER, totalUsers, currentTime, userWaitingTimes);
 
 
 	}
@@ -78,6 +79,7 @@ int main()
 	deleteVector(elevators);
 	
 	cout << "Total users: " << totalUsers << endl;
+	cout << "Average waiting time: " << averageWaitingTime(userWaitingTimes, totalUsers) << endl;
 
 
 	//system("pause");

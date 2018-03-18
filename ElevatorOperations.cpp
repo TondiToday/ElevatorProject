@@ -7,7 +7,7 @@
 // not all elevators stops are due to a floor request 
 
 
-void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_users, int& current_time)
+void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_users, int& current_time, vector<int>& waiting_times)
 {
 	vector<Elevator*>::iterator el;
 
@@ -59,6 +59,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 			vector<int> userRequests = { (*el)->ele_down.front_value()[FLOOR], (*el)->ele_down.front_value()[DIRECTION], number_of_floors, total_users };
 
+			waiting_times.push_back(current_time - (*el)->ele_down.front_value()[TIME]); // add waiting time to vector
 
 			for (int index = 0; index < users.size(); index++)
 			{
@@ -105,6 +106,8 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			printUserStatus(users);
 
 			vector<int> userRequests = { (*el)->ele_up.front_value()[FLOOR], (*el)->ele_up.front_value()[DIRECTION], number_of_floors, total_users };
+
+			waiting_times.push_back(current_time - (*el)->ele_up.front_value()[TIME]); // add waiting time to vector
 
 			for (int index = 0; index < users.size(); index++)
 			{

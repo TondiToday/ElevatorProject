@@ -23,6 +23,7 @@ enum Answer { NO = 0, YES = 1 };
 enum Requests { FLOOR = 0, DIRECTION = 1, TIME = 2};
 
 int randomFloor(int max, int min);
+double averageWaitingTime(vector<int>& waiting_times, int& total_users);
 
 
 
