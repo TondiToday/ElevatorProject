@@ -28,13 +28,22 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 // USER BOARDING LOGIC //
 
 		// if the elevator is stationary and has no floor requests
-		if ( ((*el)->is_stationary() == YES) && ( ((*el)->ele_down.isempty()) && (*el)->ele_up.isempty() ) )
+		if ((*el)->isBoarding() == true)
+		{
+			if (DEBUG == YES)
+			{
+				cout << endl;
+				cout << "***ELEVATOR STOPPED AT FLOOR***" << endl;
+				cout << endl;
+			}
+			(*el)->setBoarding(false);
+		}
+		else if ( ((*el)->is_stationary() == YES) && ( ((*el)->ele_down.isempty()) && (*el)->ele_up.isempty() ) )
 		{
 			continue;
 		}
-
 		// if the elevator is moving DOWN, and a floor request matches the current floor
-		if (  ( ((*el)->moving_up() == NO) && ((*el)->last_floor_down == (*el)->get_level()) )
+		else if (  ( ((*el)->moving_up() == NO) && ((*el)->last_floor_down == (*el)->get_level()) )
 			
 			// OR if the elevator's UP queue is empty and it's DOWN queue is not empty, and a floor request matches the current floor
 			|| ( ( ((*el)->ele_up.isempty() == YES) && (*el)->ele_down.isempty() == NO ) && ((*el)->last_floor_up == (*el)->get_level()) )
@@ -82,16 +91,17 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 			(*el)->down_stops();
 			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			(*el)->setBoarding(true);
 		}
 
 		// if the elevator is moving UP and a floor request matches the current floor
-		else if (  ( ((*el)->moving_up() == YES) && ((*el)->last_floor_up == (*el)->get_level()) )
+		else if ((((*el)->moving_up() == YES) && ((*el)->last_floor_up == (*el)->get_level()))
 
 			|| // OR  if the elevator's DOWN queue is empty and it's UP queue is not empty, and a floor request matches the current floor
-			( ( ((*el)->ele_down.isempty() == YES) && (*el)->ele_up.isempty() == NO ) && ((*el)->last_floor_up == (*el)->get_level()) )
+			((((*el)->ele_down.isempty() == YES) && (*el)->ele_up.isempty() == NO) && ((*el)->last_floor_up == (*el)->get_level()))
 
 			|| // OR  if the elevator is now stationary, but it had an UP request 
-			( ((*el)->is_stationary() == YES) && ((*el)->last_floor_up == (*el)->get_level()) )  )
+			(((*el)->is_stationary() == YES) && ((*el)->last_floor_up == (*el)->get_level())))
 
 		{
 			if (DEBUG == YES)
@@ -106,7 +116,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				cout << "Waiting time: " << current_time - (*el)->ele_up.front_value()[TIME] << endl;
 				cout << endl;
 			}
-		
+
 
 
 			vector<User*> users = generateUsers((*el)->get_level(), (*el)->ele_up.front_value()[DIRECTION], number_of_floors, total_users);
@@ -131,10 +141,10 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			// Delete users vector (dynamic memory)
 			deleteVector(users);
 
-			(*el)->up_stops();			
+			(*el)->up_stops();
 			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			(*el)->setBoarding(true);
 		}
-
 
 		
 // ELEVATOR MOVEMENT LOGIC //

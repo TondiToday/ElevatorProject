@@ -13,6 +13,8 @@ private :
 	int name;
 	bool goodStatus = true; 
 	int distanceFromRequest; 
+	bool Boarding = false;
+	
 
 
 public: 
@@ -31,8 +33,9 @@ public:
 	int get_name();
 	void set_level(int x);
 	int get_level();
-	
 	bool moving_up();
+	bool isBoarding();
+	void setBoarding(bool x);
 	void set_direction(bool x);
 	bool is_stationary();
 	void up_stops();

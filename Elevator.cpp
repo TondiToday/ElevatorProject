@@ -40,6 +40,15 @@ bool Elevator::moving_up()
 
 }
 
+bool Elevator::isBoarding()
+{
+	return Boarding;
+}
+
+void Elevator::setBoarding(bool boarding)
+{
+	Boarding = boarding;
+}
 void Elevator::set_direction(bool x)
 {
 	up = x;

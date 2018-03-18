@@ -60,7 +60,7 @@ void simulation(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int
 		}
 		elevator_op(elevators, FLOORS_NUMBER, totalUsers, currentTime, userWaitingTimes);
 
-		//system("pause");
+		system("pause");
 	}
 	// Delete elevator vector (dynamic memory)
 	deleteVector(elevators);
