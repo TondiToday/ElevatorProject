@@ -167,7 +167,7 @@ vector<int> q_modified::front_value()
 	}
 	if (isempty())
 	{
-		vector<int> temp;
+		vector<int> temp = { 0, -1, -1 };
 		return temp;
 	}
 

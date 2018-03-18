@@ -56,15 +56,7 @@ bool Elevator::is_stationary()
 		return false;
 }
 void Elevator::up_stops()
-{/*
- if (DEBUG == YES)
- {
- cout << "\t\t moving up" << endl;
- }
- set_level(ele_up.print());
- set_direction(true);
- ele_up.pop();
- */
+{
 	if (DEBUG == YES)
 	{
 		cout << "\t\t moving up" << endl;
@@ -89,15 +81,6 @@ void Elevator::up_stops()
 }
 void Elevator::down_stops()
 {
-	/*
-	if (DEBUG == YES)
-	{
-	cout << "\t\t moving down" << endl;
-	}
-	set_level (ele_down.print());
-	set_direction(false);
-	ele_down.pop();
-	*/
 	if (DEBUG == YES)
 	{
 		cout << "\t\t moving down" << endl;

@@ -38,9 +38,9 @@ int main()
 	
 	
 
-	for (int start = 0; start < 100; start++)
+	for (int currentTime = 0; currentTime < 100; currentTime++)
 	{
-		cout << endl << "ITERATIONS: " << start << endl;
+		cout << endl << "ITERATIONS: " << currentTime << endl;
 
 		// Get new floor
 		int* newTaskPtr = floorRequest(FLOORS_NUMBER);
@@ -67,10 +67,10 @@ int main()
 			}
 			
 			calculateDistance(elevators, newTask[FLOOR_REQUEST]);
-			dispatch(elevators, newTask[DIRECTION_REQUEST], newTask[FLOOR_REQUEST]);
+			dispatch(elevators, newTask[DIRECTION_REQUEST], newTask[FLOOR_REQUEST], currentTime);
 			totalFloorRequests++;
 		}
-		elevator_op(elevators, FLOORS_NUMBER, totalUsers);
+		elevator_op(elevators, FLOORS_NUMBER, totalUsers, currentTime);
 
 
 	}

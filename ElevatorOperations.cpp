@@ -7,14 +7,12 @@
 // not all elevators stops are due to a floor request 
 
 
-void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_users)
+void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_users, int& current_time)
 {
 	vector<Elevator*>::iterator el;
 
 	for (el = v.begin(); el != v.end(); ++el)
 	{
-		int currentDirection;
-
 		if (DEBUG == YES)
 		{
 			cout << "\t\t Elevator " << (*el)->get_name() << endl;
@@ -45,14 +43,18 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			|| ( ((*el)->is_stationary() == YES) && ((*el)->ele_down.front_value()[FLOOR] == (*el)->get_level()) )  )
 
 		{
-			(*el)->ele_down.pop_front(); // removes request from the queue
 
-			currentDirection = DOWN;
+			cout << endl;
+			cout << "***ELEVATOR STOPS AT FLOOR REQUEST***" << endl;
+			cout << "Elevator: " << (*el)->get_name() << endl;
+			cout << "Request floor: " << (*el)->ele_down.front_value()[FLOOR] << endl;
+			cout << "Request direction: " << (*el)->ele_down.front_value()[DIRECTION] << endl;
+			cout << "Request time: " << (*el)->ele_down.front_value()[TIME] << endl;
+			cout << "Current time: " << current_time << endl;
+			cout << endl;
 
-			cout << "Moving up? " << boolalpha << (*el)->moving_up() << endl;
-			cout << "Direction? " << currentDirection << endl;
 
-			vector<User*> users = generateUsers((*el)->get_level(), currentDirection, number_of_floors, total_users);
+			vector<User*> users = generateUsers((*el)->get_level(), (*el)->ele_down.front_value()[DIRECTION], number_of_floors, total_users);
 			printUserStatus(users);
 
 			vector<int> userRequests = { (*el)->ele_down.front_value()[FLOOR], (*el)->ele_down.front_value()[DIRECTION], number_of_floors, total_users };
@@ -71,6 +73,8 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			// Delete users vector (dynamic memory)
 			deleteVector(users);
 
+			(*el)->ele_down.pop_front(); // removes request from the queue
+
 			(*el)->down_stops();
 			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 		}
@@ -85,13 +89,18 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			( ((*el)->is_stationary() == YES) && ((*el)->ele_up.front_value()[FLOOR] == (*el)->get_level()) )  )
 
 		{
-			(*el)->ele_up.pop_front(); // removes request from the queue
+			
+			cout << endl;
+			cout << "***ELEVATOR STOPS AT FLOOR REQUEST***" << endl;
+			cout << "Elevator: " << (*el)->get_name() << endl;
+			cout << "Request floor: " << (*el)->ele_up.front_value()[FLOOR] << endl;
+			cout << "Request direction: " << (*el)->ele_up.front_value()[DIRECTION] << endl;
+			cout << "Request time: " << (*el)->ele_up.front_value()[TIME] << endl;
+			cout << "Current time: " << current_time << endl;
+			cout << endl;
 
-			currentDirection = UP;
-			cout << "Moving up? " << boolalpha << (*el)->moving_up() << endl;
-			cout << "Direction? " << currentDirection << endl;
 
-			vector<User*> users = generateUsers((*el)->get_level(), currentDirection, number_of_floors, total_users);
+			vector<User*> users = generateUsers((*el)->get_level(), (*el)->ele_up.front_value()[DIRECTION], number_of_floors, total_users);
 			printUserStatus(users);
 
 			vector<int> userRequests = { (*el)->ele_up.front_value()[FLOOR], (*el)->ele_up.front_value()[DIRECTION], number_of_floors, total_users };
@@ -105,6 +114,8 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 					cout << "User " << users[index]->get_UserID() << " entered Elevator " << (*el)->get_name() << endl;
 				}
 			}
+
+			(*el)->ele_up.pop_front(); // removes request from the queue
 
 			// Delete users vector (dynamic memory)
 			deleteVector(users);

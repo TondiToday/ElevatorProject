@@ -4,7 +4,7 @@
 #include "Elevator.h"
 
 
-void dispatch(vector<Elevator*>& elevators, int& direction, int& floor_request);
+void dispatch(vector<Elevator*>& elevators, int& direction, int& floor_request, int& current_time);
 Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& floor_request);
 Elevator* ElevatorWorstCase(vector<Elevator*>& elevators, int& direction, int& floor_request);
 

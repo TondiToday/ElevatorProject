@@ -3,13 +3,13 @@
 #include "Utilities.h"
 
 
-	void dispatch(vector<Elevator*>& d_elevators, int& direction, int& floor_request)
+	void dispatch(vector<Elevator*>& d_elevators, int& direction, int& floor_request, int& current_time)
 	{
 		// assign job to elevator
 		Elevator* placeholder = new Elevator(-1); //= new Elevator(-1);
 		placeholder = &(*findBestElevator(d_elevators, direction, floor_request));
 
-		vector<int> requestArray = { floor_request, direction, 1 };
+		vector<int> requestArray = { floor_request, direction, current_time };
 
 
 		int index_of_selected_elevator = placeholder->get_name();
