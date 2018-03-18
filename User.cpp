@@ -22,7 +22,7 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 	else if (current_direction == UP) // if elevator is going 'up'
 	{
 		// generates floor requests from above current floor to top floor
-		userDestination = randomFloor(number_of_floors - current_floor, current_floor + 1);
+		userDestination =	randomFloor(number_of_floors, 0);
 	}
 	return userDestination;
 }

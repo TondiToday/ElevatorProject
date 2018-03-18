@@ -120,12 +120,19 @@ int randomFloor(int max, int min)
 	if ((max - min + 1) == 0)
 	{
 		int zeroFix = 1;
-		return rand() % (zeroFix) + min;
+		return rand() % max;
 	}
 	else
 	{
-		return rand() % (max - min + 1) + min;
+		if (rand() % ((max + 1) - min) + min > max) {
+			return max - 1;
+		}
+		else{
+			return rand() % ((max + 1) - min) + min;
+		};
+
 	}
+
 }
 
 double averageWaitingTime(vector<int>& waiting_times, int& total_users)
