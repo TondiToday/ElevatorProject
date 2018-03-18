@@ -8,23 +8,28 @@ using namespace std;
 
 
 // Generates destinations for users entering on a given floor
-
-// Generates destinations for users entering on a given floor
 int User::generateUserRequests(int& current_floor, int& current_direction, const int& number_of_floors)
 {
-	int userDestination;
+	int userDestination = NULL;
 
 	if (current_direction == DOWN) // if elevator is going 'down'
 	{
+		cout << "EVENT 1" << endl;
 		userDestination = randomFloor(current_floor - 1, 0);
 	}
 
 	else if (current_direction == UP) // if elevator is going 'up'
 	{
+		cout << "EVENT 2" << endl;
 		// generates floor requests from above current floor to top floor
 		userDestination = randomFloor(number_of_floors - current_floor, current_floor + 1);
 	}
-	return userDestination;
+
+	if (userDestination == NULL)
+	{
+		return userDestination;
+
+	}
 }
 
 

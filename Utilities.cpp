@@ -8,21 +8,21 @@ bool DEBUG; // global debug variable
 // Set whether debug statements are displayed
 void setDebug() 
 {
-	DEBUG = true;
+	DEBUG = YES;
 	/*
-	string user_answer;
+	string user_input;
 
 	while (true)
 	{
 		cout << "Display debug statements: Y/N: ";
-		cin >> user_answer;
+		cin >> user_input;
 
-		if (toupper(user_answer[0]) == 'Y')
+		if (toupper(user_input[0]) == 'Y')
 		{
 			DEBUG = true;
 			break;
 		}
-		else if (toupper(user_answer[0]) == 'N')
+		else if (toupper(user_input[0]) == 'N')
 		{
 			DEBUG = false;
 			break;
@@ -34,7 +34,162 @@ void setDebug()
 		}
 	}
 	cout << endl;*/
+	if (DEBUG == YES)
+	{
+		cout << "Debug statements: " << boolalpha << DEBUG << endl << endl;
+	}
 }
+
+
+const int setFloorNumbers()
+{
+
+	int userBuildingFloors; // for user inputted number of floors
+	
+	while (true)
+	{
+		cout << "Please enter the number of floors in the building: ";
+		cin >> userBuildingFloors;
+
+		if (userBuildingFloors > 20)
+		{
+			cout << "More than 20 floors requires a longer simulation running time to work properly. "
+				"Ignore: Y/N: ";
+			string user_input;
+			cin >> user_input;
+
+			if (toupper(user_input[0]) == 'Y')
+			{
+				break;
+			}
+			else if (toupper(user_input[0]) == 'N')
+			{
+				continue;
+			}
+			else
+			{
+				cout << "Invalid input." << endl;
+				continue;
+			}
+		}
+		else if (userBuildingFloors < 2)
+		{
+			cout << "At least two floors are required." << endl;
+			continue;
+		}
+		else if (isalpha(userBuildingFloors))
+		{
+			cout << "Invalid input." << endl;
+			continue;
+		}
+		else
+		{
+			break;
+		}
+	}
+	const int FLOORS_NUMBER = userInputToConstant(userBuildingFloors);
+	return FLOORS_NUMBER;
+}
+
+
+
+const int setElevatorNumbers(const int FLOORS_NUMBER)
+{
+	int userElevatorNumber; // for user inputted number of elevators
+
+	while (true)
+	{
+		cout << "Please enter the number of elevators in the building: ";
+		cin >> userElevatorNumber;
+
+		// floor to elevator ratio should be 2:1 or 2.5:1
+		float floorToElevatorRatio = FLOORS_NUMBER / userElevatorNumber;
+
+		if ((floorToElevatorRatio < 2) || (floorToElevatorRatio > 2.5))
+		{
+			cout << "A floor to elevator ratio of 2:1 or 2.5:1 will provide more realistic results." << endl;
+			cout << "Consider using " << FLOORS_NUMBER / 2.5 << " elevators. " << "Ignore: Y/N: ";
+			string user_input;
+			cin >> user_input;
+
+			if (toupper(user_input[0]) == 'Y')
+			{
+				break;
+			}
+			else if (toupper(user_input[0]) == 'N')
+			{
+				continue;
+			}
+			else
+			{
+				cout << "Invalid input." << endl;
+				continue;
+			}
+		}
+		else if (userElevatorNumber < 2)
+		{
+			cout << "At least two floors are required." << endl;
+			break;
+		}
+		else if (isalpha(userElevatorNumber))
+		{
+			cout << "Invalid input." << endl;
+			continue;
+		}
+		else
+		{
+			break;
+		}
+	}
+	const int ELEVATORS_NUMBER = userInputToConstant(userElevatorNumber);
+	return ELEVATORS_NUMBER;
+}
+
+
+const int setSimTime(const int FLOORS_NUMBER, const int ELEVATORS_NUMBER)
+{
+	int userSimTime; // for loop iterations
+
+	while (true)
+	{
+		cout << "Please enter simulation time in iterations: ";
+		cin >> userSimTime;
+
+		if (userSimTime < 100)
+		{
+			cout << "A sim time of at least 100 is recommended." << endl;
+			cout << "Consider a sim time of " << (FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 << " iterations. " << "Ignore: Y/N: ";
+			string user_input;
+			cin >> user_input;
+
+			if (toupper(user_input[0]) == 'Y')
+			{
+				break;
+			}
+			else if (toupper(user_input[0]) == 'N')
+			{
+				continue;
+			}
+			else
+			{
+				cout << "Invalid input." << endl;
+				continue;
+			}
+		}
+		else if (isalpha(userSimTime))
+		{
+			cout << "Invalid input." << endl;
+			continue;
+		}
+		else
+		{
+			break;
+		}
+	}
+	const int SIM_TIME = userInputToConstant(userSimTime);
+	return SIM_TIME;
+}
+
 
 
 
@@ -120,16 +275,26 @@ int randomFloor(int max, int min)
 	if ((max - min + 1) == 0)
 	{
 		int zeroFix = 1;
-		return rand() % (zeroFix) + min;
+		return rand() % max;
 	}
 	else
 	{
-		return rand() % (max - min + 1) + min;
+		if (rand() % ((max + 1) - min) + min > max) {
+			return max - 1;
+		}
+		else {
+			return rand() % ((max + 1) - min) + min;
+		};
 	}
 }
 
 double averageWaitingTime(vector<int>& waiting_times, int& total_users)
 {
+	if (total_users == 0)
+	{
+		return 0;
+	}
+
 	double sum_of_waiting_times = 0;
 
 	for (int i = 0; i < waiting_times.size(); i++)
@@ -139,3 +304,17 @@ double averageWaitingTime(vector<int>& waiting_times, int& total_users)
 	return sum_of_waiting_times / total_users;
 }
 
+void displayStatistics(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int& SIM_TIME,
+	int& total_users, vector<int>& user_waiting_times)
+{
+	cout << endl;
+	cout << "Simulation complete." << endl;
+	cout << "Number of floors: " << FLOORS_NUMBER << endl;
+	cout << "Number of elevators: " << ELEVATORS_NUMBER << endl;
+	cout << "Simulation time: " << SIM_TIME << " iterations" << endl;
+	cout << "Total users: " << total_users << endl;
+	cout << "Average waiting time: " << averageWaitingTime(user_waiting_times, total_users) << 
+		" iterations" << endl << endl;
+	cout << "Waiting time refers to the time when a floor request to the elevator arriving to "
+		"pick up users." << endl;
+}

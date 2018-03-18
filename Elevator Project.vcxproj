@@ -24,6 +24,7 @@
     <ClInclude Include="ElevatorOperations.h" />
     <ClInclude Include="FloorRequests.h" />
     <ClInclude Include="Modified_q.h" />
+    <ClInclude Include="Simulation.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
@@ -34,7 +35,7 @@
     <ClCompile Include="FloorRequests.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Modified_q.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>

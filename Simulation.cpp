@@ -7,39 +7,26 @@
 #include <ctime>
 
 
-int main()
+void simulation(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int& SIM_TIME)
 {
+
 	srand(unsigned(time(0))); // set random seed, need to leave in main
 
-	int userBuildingFloors;// for user inputted number of floors
-	int userElevatorNumber; // for user inputted number of elevators
 	int totalUsers = 0;
 	int totalFloorRequests = 0;
 	vector <Elevator*> elevators;
 	vector<int> userWaitingTimes;
 
-	setDebug();
-	cout << "Debug statements: " << boolalpha << DEBUG << endl << endl;
-
 	
-	cout << "Please enter the number of floors in the building: ";
-	cin >> userBuildingFloors;
-	const int FLOORS_NUMBER = userInputToConstant(userBuildingFloors);
-
-	cout << "Please enter the number of elevators in the building: ";
-	cin >> userElevatorNumber;
-	const int ELEVATORS_NUMBER = userInputToConstant(userElevatorNumber);
-
-
-	for (int i = 0; i < userElevatorNumber; i++)
+	
+	for (int i = 0; i < ELEVATORS_NUMBER; i++)
 	{
 		Elevator* createElevator = new Elevator(i, FLOORS_NUMBER, ELEVATORS_NUMBER);
 		elevators.push_back(createElevator);
 	}
 	
-	
 
-	for (int currentTime = 0; currentTime < 100; currentTime++)
+	for (int currentTime = 0; currentTime < SIM_TIME; currentTime++)
 	{
 		cout << endl << "ITERATIONS: " << currentTime << endl;
 
@@ -78,10 +65,14 @@ int main()
 	// Delete elevator vector (dynamic memory)
 	deleteVector(elevators);
 	
-	cout << "Total users: " << totalUsers << endl;
-	cout << "Average waiting time: " << averageWaitingTime(userWaitingTimes, totalUsers) << endl;
+	//cout << "Total users: " << totalUsers << endl;
+	//cout << "Average waiting time iterations: " << averageWaitingTime(userWaitingTimes, totalUsers) << endl;
+
+	int stats_array[6] = { FLOORS_NUMBER, ELEVATORS_NUMBER, SIM_TIME, 
+		totalUsers, averageWaitingTime(userWaitingTimes, totalUsers) };
+	
+	displayStatistics(FLOORS_NUMBER, ELEVATORS_NUMBER, SIM_TIME, totalUsers, userWaitingTimes);
 
 
 	//system("pause");
-	return 0;
 }

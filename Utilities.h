@@ -25,6 +25,13 @@ enum Requests { FLOOR = 0, DIRECTION = 1, TIME = 2};
 int randomFloor(int max, int min);
 double averageWaitingTime(vector<int>& waiting_times, int& total_users);
 
+const int setFloorNumbers();
+const int setElevatorNumbers(const int number_of_floors);
+const int setSimTime(const int FLOORS_NUMBER, const int ELEVATORS_NUMBER);
+
+
+void displayStatistics(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int& SIM_TIME,
+	int& total_users, vector<int>& user_waiting_times);
 
 
 #endif
