@@ -56,7 +56,7 @@ int* floorRequest(const int& number_of_floors)
 		else if (floorDirection == UP) 
 		{
 			// generates floor requests from above current floor to top floor
-			floorNumber = randomFloor(number_of_floors - currentFloor, currentFloor + 1);
+			floorNumber = randomFloor(number_of_floors , currentFloor + 1);
 		}
 	}
 

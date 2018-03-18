@@ -33,15 +33,17 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			if (DEBUG == YES)
 			{
 				cout << endl;
-				cout << "***ELEVATOR STOPPED AT FLOOR***" << endl;
+				cout << "***ELEVATOR Finished Boarding***" << endl;
 				cout << endl;
 			}
 			(*el)->setBoarding(false);
+			(*el)->last_floor_down = -1;
+			(*el)->last_floor_up = -1;
 		}
-		else if ( ((*el)->is_stationary() == YES) && ( ((*el)->ele_down.isempty()) && (*el)->ele_up.isempty() ) )
+		/*else if ( ((*el)->is_stationary() == YES) && ( ((*el)->ele_down.isempty()) && (*el)->ele_up.isempty() ) )
 		{
 			continue;
-		}
+		}*/
 		// if the elevator is moving DOWN, and a floor request matches the current floor
 		else if (  ( ((*el)->moving_up() == NO) && ((*el)->last_floor_down == (*el)->get_level()) )
 			
@@ -55,7 +57,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			if (DEBUG == YES)
 			{
 				cout << endl;
-				cout << "***ELEVATOR STOPS AT FLOOR REQUEST***" << endl;
+				cout << "***Elevator Starts Boarding***" << endl;
 				cout << "Elevator: " << (*el)->get_name() << " stops at " << (*el)->get_level() << endl;
 				cout << "Request floor: " << (*el)->ele_down.front_value()[FLOOR] << endl;
 				cout << "Request direction: " << (*el)->ele_down.front_value()[DIRECTION] << endl;
@@ -89,8 +91,8 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 			(*el)->ele_down.pop_front(); // removes request from the queue
 
-			(*el)->down_stops();
-			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			//(*el)->down_stops();
+			//cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 			(*el)->setBoarding(true);
 		}
 
@@ -107,7 +109,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			if (DEBUG == YES)
 			{
 				cout << endl;
-				cout << "***ELEVATOR STOPS AT FLOOR REQUEST***" << endl;
+				cout << "***Elevator Starts Boarding***" << endl;
 				cout << "Elevator: " << (*el)->get_name() << " stops at " << (*el)->get_level() << endl;
 				cout << "Request floor: " << (*el)->ele_up.front_value()[FLOOR] << endl;
 				cout << "Request direction: " << (*el)->ele_up.front_value()[DIRECTION] << endl;
@@ -141,8 +143,8 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			// Delete users vector (dynamic memory)
 			deleteVector(users);
 
-			(*el)->up_stops();
-			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			//(*el)->up_stops();
+			//cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 			(*el)->setBoarding(true);
 		}
 

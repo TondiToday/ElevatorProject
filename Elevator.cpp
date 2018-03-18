@@ -69,7 +69,6 @@ void Elevator::up_stops()
 	if (DEBUG == YES)
 	{
 		cout << "\t\t moving up" << endl;
-		cout << get_level() << "   " << ele_up.front_value()[FLOOR] << endl;
 	}
 	int new_level = abs(abs(get_level()) + 1);
 	if (abs(get_level() - ele_up.front_value()[FLOOR]) != 1) {
@@ -93,7 +92,6 @@ void Elevator::down_stops()
 	if (DEBUG == YES)
 	{
 		cout << "\t\t moving down" << endl;
-		cout << get_level() << "   " << ele_down.front_value()[FLOOR] << endl;
 	}
 	int new_level = abs(abs(get_level()) - 1);
 	if (abs(get_level() - ele_down.front_value()[FLOOR]) != 1) {

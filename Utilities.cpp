@@ -1,6 +1,7 @@
 #include "Utilities.h"
 #include "Modified_q.h"
 #include "User.h"
+#include "time.h"
 
 
 bool DEBUG; // global debug variable
@@ -272,20 +273,9 @@ void printUserStatus(vector<User*>& users_vector)
 
 int randomFloor(int max, int min)
 {
-	if ((max - min + 1) == 0)
-	{
-		int zeroFix = 1;
-		return rand() % max;
-	}
-	else
-	{
-		if (rand() % ((max + 1) - min) + min > max) {
-			return max - 1;
-		}
-		else {
-			return rand() % ((max + 1) - min) + min;
-		};
-	}
+	srand(time(NULL));
+	int num = (min + (rand() % (int)(max - min + 1)));
+	return num;
 }
 
 double averageWaitingTime(vector<int>& waiting_times, int& total_users)

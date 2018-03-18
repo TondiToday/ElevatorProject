@@ -16,20 +16,22 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 	{
 		cout << "EVENT 1" << endl;
 		userDestination = randomFloor(current_floor - 1, 0);
+		return userDestination;
 	}
 
 	else if (current_direction == UP) // if elevator is going 'up'
 	{
 		cout << "EVENT 2" << endl;
 		// generates floor requests from above current floor to top floor
-		userDestination = randomFloor(number_of_floors - current_floor, current_floor + 1);
+		userDestination = randomFloor(number_of_floors , current_floor + 1);
+		return userDestination;
 	}
 
-	if (userDestination == NULL)
+	/*if (userDestination == NULL)
 	{
 		return userDestination;
 
-	}
+	}*/
 }
 
 
