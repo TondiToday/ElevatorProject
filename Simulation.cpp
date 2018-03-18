@@ -74,5 +74,5 @@ void simulation(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int
 	displayStatistics(FLOORS_NUMBER, ELEVATORS_NUMBER, SIM_TIME, totalUsers, userWaitingTimes);
 
 
-	//system("pause");
+	system("pause");
 }
