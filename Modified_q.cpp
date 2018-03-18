@@ -158,6 +158,11 @@ vector<int> q_modified::back_value()
 	{
 		return back->data;
 	}
+	else
+	{
+		vector<int> temp = { 0, -1, -1 };
+		return temp;
+	}
 }
 vector<int> q_modified::front_value()
 {

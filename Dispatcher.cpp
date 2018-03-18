@@ -145,6 +145,7 @@
 						cout << "All elevators have bad status" << endl;
 						cout << "Decision: Elevator with shortest travel distance" << endl;
 					}
+					
 					return ElevatorWorstCase(elevators, direction, floor_request);
 				}
 

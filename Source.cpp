@@ -38,7 +38,7 @@ int main()
 	
 	
 
-	for (int currentTime = 0; currentTime < 100; currentTime++)
+	for (int currentTime = 0; currentTime < 1000; currentTime++)
 	{
 		cout << endl << "ITERATIONS: " << currentTime << endl;
 

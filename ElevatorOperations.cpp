@@ -43,7 +43,6 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			|| ( ((*el)->is_stationary() == YES) && ((*el)->ele_down.front_value()[FLOOR] == (*el)->get_level()) )  )
 
 		{
-
 			cout << endl;
 			cout << "***ELEVATOR STOPS AT FLOOR REQUEST***" << endl;
 			cout << "Elevator: " << (*el)->get_name() << endl;
@@ -51,6 +50,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			cout << "Request direction: " << (*el)->ele_down.front_value()[DIRECTION] << endl;
 			cout << "Request time: " << (*el)->ele_down.front_value()[TIME] << endl;
 			cout << "Current time: " << current_time << endl;
+			cout << "Waiting time: " << current_time - (*el)->ele_down.front_value()[TIME] << endl;
 			cout << endl;
 
 
@@ -97,6 +97,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			cout << "Request direction: " << (*el)->ele_up.front_value()[DIRECTION] << endl;
 			cout << "Request time: " << (*el)->ele_up.front_value()[TIME] << endl;
 			cout << "Current time: " << current_time << endl;
+			cout << "Waiting time: " << current_time - (*el)->ele_up.front_value()[TIME] << endl;
 			cout << endl;
 
 
