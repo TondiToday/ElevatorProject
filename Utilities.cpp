@@ -9,7 +9,7 @@ bool DEBUG; // global debug variable
 // Set whether debug statements are displayed
 void setDebug() 
 {
-	DEBUG = YES;
+	DEBUG = NO;
 	/*
 	string user_input;
 
@@ -296,7 +296,7 @@ int randomFloor(int max, int min)
 	if ((max - min + 1) == 0)
 	{
 		int zeroFix = 1;
-		return rand() % max;
+		return rand() % zeroFix;
 	}
 	else
 	{

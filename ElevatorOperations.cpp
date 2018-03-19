@@ -19,10 +19,10 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 		};
 
 		if ((*el)->get_level() == 0) {
-			(*el)->set_direction(true);
+			(*el)->set_direction(UP);
 		}
 		else if ((*el)->get_level() == number_of_floors) {
-			(*el)->set_direction(false);
+			(*el)->set_direction(DOWN);
 		}
 	
 
