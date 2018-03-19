@@ -13,7 +13,7 @@ int* floorRequest(const int& number_of_floors)
 	int floorNumber;
 	int newFloorRequest[2];
 	int isRequest = rand() % 2;
-	//int isRequest = true;
+	//int isRequest = true; // force a request every iteration
 
 	// No floor request was made
 	if (isRequest == NO)
@@ -26,7 +26,7 @@ int* floorRequest(const int& number_of_floors)
 	else if (isRequest == YES)
 	{
 		// Random floor generated
-		int currentFloor = 1 + rand() % number_of_floors;
+		int currentFloor = randomFloor(number_of_floors, 0); 
 
 		if (currentFloor == 0) // if on ground floor, have to go up
 		{
@@ -41,7 +41,6 @@ int* floorRequest(const int& number_of_floors)
 		else
 		{
 			// generates floor direction, down or up (0 or 1)
-			//floorDirection = rand() % 2;
 			floorDirection = randomFloor(1, 0);
 		}
 
@@ -58,6 +57,14 @@ int* floorRequest(const int& number_of_floors)
 			floorNumber = randomFloor(number_of_floors , currentFloor + 1);
 		}
 	}
+
+	// check for correct data
+	if (floorDirection == 0 && floorNumber == 0)
+	{
+		cout << "Floor direction and number are both 0." << endl;
+		throw exception();
+	}
+
 
 	// Add to array
 	newFloorRequest[DIRECTION_REQUEST] = floorDirection;

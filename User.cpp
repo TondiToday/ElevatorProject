@@ -27,7 +27,8 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 	}
 	else
 	{
-		throw exception("The direction was neither 0 nor 1");
+		cout << "Direction is neither 0 nor 1." << endl;
+		throw exception();
 	}
 }
 

@@ -7,7 +7,7 @@ using namespace std;
 
 
 int main()
-{	/*
+{	
 	// OLD Easier Testing
 	int userBuildingFloors;// for user inputted number of floors
 	int userElevatorNumber; // for user inputted number of elevators
@@ -29,14 +29,15 @@ int main()
 	cin >> userElevatorNumber;
 	const int ELEVATORS_NUMBER = userInputToConstant(userElevatorNumber);
 	// OLD Easier Testing
-	*/
 	
 	
+	/*
+	setDebug();
 	const int FLOORS_NUMBER = setFloorNumbers();
 	const int ELEVATORS_NUMBER = setElevatorNumbers(FLOORS_NUMBER);
 	const int SIM_TIME = setSimTime(FLOORS_NUMBER, ELEVATORS_NUMBER);
-	
-	setDebug();
+	*/
+
 	simulation(FLOORS_NUMBER, ELEVATORS_NUMBER, SIM_TIME);
 
 

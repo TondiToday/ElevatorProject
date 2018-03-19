@@ -162,6 +162,18 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 		
 // ELEVATOR MOVEMENT LOGIC //
 
+		else if ((*el)->get_level() == number_of_floors) {
+			(*el)->ele_up.pop();
+			(*el)->set_direction(DOWN);
+			(*el)->down_stops();
+
+		}
+		else if ((*el)->get_level() == 0) {
+			(*el)->ele_down.pop();
+			(*el)->set_direction(UP);
+			(*el)->up_stops();
+
+		}
 		else if ((*el)->ele_down.getsize() == 0 && (*el)->ele_up.getsize() == 0) {
 			cout << "initial condition" << endl;
 		}
