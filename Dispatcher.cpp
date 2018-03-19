@@ -33,10 +33,7 @@
 		resetElevatorStatus(d_elevators);
 	}
 
-	// remove bad elevators 
-	int dismissBadElevators(vector<Elevator*>& m_elevators);
-
-
+	
 	Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& floor_request)
 	{	// elevators must be passed by value because it will modified later!
 

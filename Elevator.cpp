@@ -82,6 +82,7 @@ void Elevator::up_stops()
 		last_floor_up = ele_up.front_value()[FLOOR];
 		set_direction(true);
 		ele_up.pop_front();
+		floors_stopped_between_request = floors_stopped_between_request + 1;
 	}
 
 

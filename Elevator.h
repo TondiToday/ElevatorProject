@@ -46,6 +46,7 @@ public:
 	void set_distanceFromRequest(int floor_request_level); 
 	int last_floor_down = -1;
 	int last_floor_up = -1;
+	int floors_stopped_between_request = 0;
 
 };
 

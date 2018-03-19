@@ -272,7 +272,7 @@ void printUserStatus(vector<User*>& users_vector)
 
 
 int randomFloor(int max, int min)
-{
+{//BROKEN
 	srand(time(NULL));
 	int num = (min + (rand() % (int)(max - min + 1)));
 	return num;

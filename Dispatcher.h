@@ -16,7 +16,8 @@ int findMinDistance(vector<Elevator*>& elevators);
 bool compareJobsUp(Elevator* elevator1, Elevator* elevator2);
 bool compareJobsDown(Elevator* elevator1, Elevator* elevator2);
 bool compareDistance(Elevator* elevator1, Elevator* elevator2);
-
+// remove bad elevators 
+int dismissBadElevators(vector<Elevator*>& m_elevators);
 
 void resetElevatorStatus(vector<Elevator*>& elevators);
 

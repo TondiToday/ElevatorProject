@@ -63,7 +63,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				cout << "Request direction: " << (*el)->ele_down.front_value()[DIRECTION] << endl;
 				cout << "Request time: " << (*el)->ele_down.front_value()[TIME] << endl;
 				cout << "Current time: " << current_time << endl;
-				cout << "Waiting time: " << current_time - (*el)->ele_down.front_value()[TIME] << endl;
+				cout << "Waiting time: " << current_time - (*el)->ele_down.front_value()[TIME] + (*el)->floors_stopped_between_request << endl;
 				cout << endl;
 			}
 		
@@ -94,6 +94,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			//(*el)->down_stops();
 			//cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 			(*el)->setBoarding(true);
+			(*el)->floors_stopped_between_request = 0;
 		}
 
 		// if the elevator is moving UP and a floor request matches the current floor
@@ -115,7 +116,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				cout << "Request direction: " << (*el)->ele_up.front_value()[DIRECTION] << endl;
 				cout << "Request time: " << (*el)->ele_up.front_value()[TIME] << endl;
 				cout << "Current time: " << current_time << endl;
-				cout << "Waiting time: " << current_time - (*el)->ele_up.front_value()[TIME] << endl;
+				cout << "Waiting time: " << current_time - (*el)->ele_up.front_value()[TIME] + (*el)->floors_stopped_between_request << endl;
 				cout << endl;
 			}
 
@@ -130,7 +131,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 			for (int index = 0; index < users.size(); index++)
 			{
-				(*el)->ele_up.push_up(userRequests);
+				(*el)->ele_up.push_up(userRequests[index]);
 
 				if (DEBUG == YES)
 				{
@@ -146,6 +147,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			//(*el)->up_stops();
 			//cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 			(*el)->setBoarding(true);
+			(*el)->floors_stopped_between_request = 0;
 		}
 
 		
