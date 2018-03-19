@@ -61,8 +61,9 @@ int* floorRequest(const int& number_of_floors)
 	// check for correct data
 	if (floorDirection == 0 && floorNumber == 0)
 	{
-		cout << "Floor direction and number are both 0." << endl;
-		throw exception();
+		floorDirection = 1;
+		//cout << "Floor direction and number are both 0." << endl;
+		//throw exception();
 	}
 
 
