@@ -2,22 +2,21 @@
 #define ELEVATOR_H
 
 #include "Modified_q.h"
+#include <vector>
 
-
-class Elevator 
+class Elevator
 {
-private :
+private:
 	int level;
 	bool up;
 	bool stationary = true;
 	int name;
-	bool goodStatus = true; 
-	int distanceFromRequest; 
+	bool goodStatus = true;
+	int distanceFromRequest;
 	bool Boarding = false;
-	
 
 
-public: 
+public:
 
 	// Constructor
 	Elevator(int x, const int userBuildingFloors, const int userElevatorNumber);
@@ -25,9 +24,6 @@ public:
 
 	q_modified ele_up;   // both floor requests and user requests
 	q_modified ele_down; // both floor requests and user requests
-
-	//q_modified floorRequests_up;   // only floor requests sent by the dispatcher
-	//q_modified floorRequests_down; // only floor requests sent by the dispatcher
 
 	void set_name(int i);
 	int get_name();
@@ -41,13 +37,11 @@ public:
 	void up_stops();
 	void down_stops();
 	bool get_goodStatus();
-	void set_goodStatus(bool status); 
-	int get_distanceFromRequest(); 
-	void set_distanceFromRequest(int floor_request_level); 
-	int last_floor_down = -1;
-	int last_floor_up = -1;
-	int floors_stopped_between_request = 0;
-
+	void set_goodStatus(bool status);
+	int get_distanceFromRequest();
+	void set_distanceFromRequest(int floor_request_level);
+	vector<int> last_floor_down = { -1, -1, -1 };
+	vector<int> last_floor_up = { -1, -1, -1 };
 };
 
 

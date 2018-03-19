@@ -79,10 +79,9 @@ void Elevator::up_stops()
 	{
 
 		set_level(ele_up.front_value()[FLOOR]);
-		last_floor_up = ele_up.front_value()[FLOOR];
+		last_floor_up = { ele_up.front_value()[FLOOR], ele_up.front_value()[DIRECTION], ele_up.front_value()[TIME] };
 		set_direction(true);
 		ele_up.pop_front();
-		floors_stopped_between_request = floors_stopped_between_request + 1;
 	}
 
 
@@ -103,14 +102,13 @@ void Elevator::down_stops()
 	{
 
 		set_level(ele_down.front_value()[FLOOR]);
-		last_floor_down = ele_down.front_value()[FLOOR];
+		last_floor_down = { ele_down.front_value()[FLOOR], ele_down.front_value()[DIRECTION], ele_down.front_value()[TIME] };
 		set_direction(false);
 		ele_down.pop_front();
 	}
 
 
 }
-
 bool Elevator::get_goodStatus()
 {
 	return goodStatus;

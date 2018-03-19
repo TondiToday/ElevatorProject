@@ -37,22 +37,21 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				cout << endl;
 			}
 			(*el)->setBoarding(false);
-			(*el)->last_floor_down = -1;
-			(*el)->last_floor_up = -1;
+			(*el)->last_floor_down = { -1, -1, -1 };
+			(*el)->last_floor_up = { -1, -1, -1 };
 		}
 		/*else if ( ((*el)->is_stationary() == YES) && ( ((*el)->ele_down.isempty()) && (*el)->ele_up.isempty() ) )
 		{
 			continue;
 		}*/
 		// if the elevator is moving DOWN, and a floor request matches the current floor
-		else if (  ( ((*el)->moving_up() == NO) && ((*el)->last_floor_down == (*el)->get_level()) )
-			
+		else if ((((*el)->moving_up() == NO) && ((*el)->last_floor_down[FLOOR] == (*el)->get_level()) && (*el)->ele_down.isempty() == NO)
+
 			// OR if the elevator's UP queue is empty and it's DOWN queue is not empty, and a floor request matches the current floor
-			|| ( ( ((*el)->ele_up.isempty() == YES) && (*el)->ele_down.isempty() == NO ) && ((*el)->last_floor_up == (*el)->get_level()) )
+			|| ((((*el)->ele_up.isempty() == YES) && (*el)->ele_down.isempty() == NO) && ((*el)->last_floor_up[FLOOR] == (*el)->get_level()))
 
 			// OR if the elevator is now stationary, but it had a DOWN request, and a floor request matches the current floor
-			|| ( ((*el)->is_stationary() == YES) && ((*el)->last_floor_down == (*el)->get_level()) )  )
-
+			|| (((*el)->is_stationary() == YES) && ((*el)->last_floor_down[FLOOR] == (*el)->get_level())))
 		{
 			if (DEBUG == YES)
 			{
@@ -63,7 +62,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				cout << "Request direction: " << (*el)->ele_down.front_value()[DIRECTION] << endl;
 				cout << "Request time: " << (*el)->ele_down.front_value()[TIME] << endl;
 				cout << "Current time: " << current_time << endl;
-				cout << "Waiting time: " << current_time - (*el)->ele_down.front_value()[TIME] + (*el)->floors_stopped_between_request << endl;
+				cout << "Waiting time: " << current_time - (*el)->ele_down.front_value()[TIME] << endl;
 				cout << endl;
 			}
 		
@@ -72,13 +71,19 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			vector<User*> users = generateUsers((*el)->get_level(), (*el)->ele_down.front_value()[DIRECTION], number_of_floors, total_users);
 			printUserStatus(users);
 
-			vector<int> userRequests;
+			//vector<int> userRequests;
 
-			waiting_times.push_back(current_time - (*el)->ele_down.front_value()[TIME]); // add waiting time to vector
+			//waiting_times.push_back(current_time - (*el)->ele_down.front_value()[TIME]); // add waiting time to vector
 
 			for (int index = 0; index < users.size(); index++)
 			{
-				users[index]->set_userDestination(userInputToConstant((*el)->get_level()), userInputToConstant(0), number_of_floors);
+				// vector for each users { FLOOR, DIRECTION, which matches the elevator's floor request direction, and the current time }
+				vector<int> eachUserRequest = { users[index]->get_userDestination(), (*el)->last_floor_down[DIRECTION], current_time };
+
+				(*el)->ele_down.push_down(eachUserRequest);
+
+				waiting_times.push_back(current_time - (*el)->last_floor_down[TIME]); // add waiting time to vector
+				/*users[index]->set_userDestination(userInputToConstant((*el)->get_level()), userInputToConstant(0), number_of_floors);
 				userRequests.push_back(users[index]->get_userDestination());
 				if (userRequests[0] < (*el)->get_level()) {
 
@@ -89,7 +94,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 					(*el)->ele_up.push_up(userRequests);
 				}
 				else {};
-				userRequests.pop_back();
+				userRequests.pop_back();*/
 
 				if (DEBUG == YES)
 				{
@@ -105,17 +110,18 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			//(*el)->down_stops();
 			//cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 			(*el)->setBoarding(true);
-			(*el)->floors_stopped_between_request = 0;
+		
 		}
 
 		// if the elevator is moving UP and a floor request matches the current floor
-		else if ((((*el)->moving_up() == YES) && ((*el)->last_floor_up == (*el)->get_level()))
+		else if ((((*el)->moving_up() == YES) && ((*el)->last_floor_up[FLOOR] == (*el)->get_level()))
 
 			|| // OR  if the elevator's DOWN queue is empty and it's UP queue is not empty, and a floor request matches the current floor
-			((((*el)->ele_down.isempty() == YES) && (*el)->ele_up.isempty() == NO) && ((*el)->last_floor_up == (*el)->get_level()))
+			((((*el)->ele_down.isempty() == YES) && (*el)->ele_up.isempty() == NO) && ((*el)->last_floor_up[FLOOR] == (*el)->get_level()))
 
 			|| // OR  if the elevator is now stationary, but it had an UP request 
-			(((*el)->is_stationary() == YES) && ((*el)->last_floor_up == (*el)->get_level())))
+			(((*el)->is_stationary() == YES) && ((*el)->last_floor_up[FLOOR] == (*el)->get_level())))
+
 
 		{
 			if (DEBUG == YES)
@@ -127,7 +133,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				cout << "Request direction: " << (*el)->ele_up.front_value()[DIRECTION] << endl;
 				cout << "Request time: " << (*el)->ele_up.front_value()[TIME] << endl;
 				cout << "Current time: " << current_time << endl;
-				cout << "Waiting time: " << current_time - (*el)->ele_up.front_value()[TIME] + (*el)->floors_stopped_between_request << endl;
+				cout << "Waiting time: " << current_time - (*el)->ele_up.front_value()[TIME] << endl;
 				cout << endl;
 			}
 
@@ -136,15 +142,20 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			vector<User*> users = generateUsers((*el)->get_level(), (*el)->ele_up.front_value()[DIRECTION], number_of_floors, total_users);
 			printUserStatus(users);
 
-			vector<int> userRequests;
+			//vector<int> userRequests;
 
-			waiting_times.push_back(current_time - (*el)->ele_up.front_value()[TIME]); // add waiting time to vector
+			//waiting_times.push_back(current_time - (*el)->ele_up.front_value()[TIME]); // add waiting time to vector
 
 			for (int index = 0; index < users.size(); index++)
 			{
+				// vector for each users { FLOOR, DIRECTION, which matches the elevator's floor request direction, and the current time }
+				vector<int> eachUserRequest = { users[index]->get_userDestination(), (*el)->last_floor_up[DIRECTION], current_time };
+
+				(*el)->ele_up.push_up(eachUserRequest);
+
+				waiting_times.push_back(current_time - (*el)->last_floor_up[TIME]); // add waiting time to vector
 			
-			
-				users[index]->set_userDestination(userInputToConstant((*el)->get_level()), userInputToConstant(1), number_of_floors);
+				/*users[index]->set_userDestination(userInputToConstant((*el)->get_level()), userInputToConstant(1), number_of_floors);
 				userRequests.push_back(users[index]->get_userDestination());
 				if (userRequests[0] < (*el)->get_level()) {
 
@@ -154,10 +165,10 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				else if (userRequests[0] > (*el)->get_level()) {
 					(*el)->ele_up.push_up(userRequests);
 				}
-				else() {
+				else {
 
 				};
-				userRequests.pop_back();
+				userRequests.pop_back();*/
 
 				if (DEBUG == YES)
 				{
@@ -165,7 +176,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				}
 			}
 
-			(*el)->ele_up.pop_front(); // removes request from the queue
+			//(*el)->ele_up.pop_front(); // removes request from the queue
 
 			// Delete users vector (dynamic memory)
 			deleteVector(users);
@@ -173,7 +184,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			//(*el)->up_stops();
 			//cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 			(*el)->setBoarding(true);
-			(*el)->floors_stopped_between_request = 0;
+			
 		}
 
 		
