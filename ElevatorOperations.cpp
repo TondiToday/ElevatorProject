@@ -36,12 +36,32 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			if (DEBUG == YES)
 			{
 				cout << endl;
-				cout << "***ELEVATOR Finished Boarding***" << endl;
+				cout << "***ELEVATOR are Boarding***" << endl;
 				cout << endl;
 			}
 			(*el)->setBoarding(false);
 			(*el)->last_floor_down = { -1, -1, -1 };
 			(*el)->last_floor_up = { -1, -1, -1 };
+			if ((*el)->isLeaving() == true) 
+			{
+				if (DEBUG == YES)
+				{
+					cout << endl;
+					cout << "***ELEVATOR Passengers are Boarding***" << endl;
+					cout << endl;
+				}
+				(*el)->setLeaving(false);
+			};
+		}
+		else if ((*el)->isLeaving() == true)
+		{
+			if (DEBUG == YES)
+			{
+				cout << endl;
+				cout << "***ELEVATOR Passengers are Leaving***" << endl;
+				cout << endl;
+			}
+			(*el)->setLeaving(false);
 		}
 
 		// if the elevator is moving DOWN, and a floor request matches the current floor
@@ -59,7 +79,6 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			if (DEBUG == YES)
 			{
 				cout << endl;
-				cout << "***Elevator Starts Boarding***" << endl;
 				cout << "Elevator: " << (*el)->get_name() << " stops at " << (*el)->get_level() << endl;
 				cout << "Request floor: " << (*el)->last_floor_down[FLOOR] << endl;
 				cout << "Request direction: " << (*el)->last_floor_down[DIRECTION] << endl;
@@ -114,7 +133,6 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			if (DEBUG == YES)
 			{
 				cout << endl;
-				cout << "***Elevator Starts Boarding***" << endl;
 				cout << "Elevator: " << (*el)->get_name() << " stops at " << (*el)->get_level() << endl;
 				cout << "Request floor: " << (*el)->last_floor_up[FLOOR] << endl;
 				cout << "Request direction: " << (*el)->last_floor_up[DIRECTION] << endl;

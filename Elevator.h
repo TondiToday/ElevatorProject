@@ -14,6 +14,7 @@ private :
 	bool goodStatus = true; 
 	int distanceFromRequest; 
 	bool Boarding = false;
+	bool Leaving = false;
 
 
 public: 
@@ -31,7 +32,9 @@ public:
 	int get_level();
 	bool moving_up();
 	bool isBoarding();
+	bool isLeaving();
 	void setBoarding(bool x);
+	void setLeaving(bool x);
 	void set_direction(bool x);
 	bool is_stationary();
 	void up_stops();

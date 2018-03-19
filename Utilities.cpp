@@ -9,7 +9,7 @@ bool DEBUG; // global debug variable
 // Set whether debug statements are displayed
 void setDebug() 
 {
-	DEBUG = NO;
+	DEBUG = YES;
 	/*
 	string user_input;
 

@@ -45,9 +45,18 @@ bool Elevator::isBoarding()
 	return Boarding;
 }
 
+bool Elevator::isLeaving()
+{
+	return Leaving;
+}
 void Elevator::setBoarding(bool boarding)
 {
 	Boarding = boarding;
+}
+
+void Elevator::setLeaving(bool leaving)
+{
+	Leaving = leaving;
 }
 void Elevator::set_direction(bool x)
 {
@@ -81,6 +90,7 @@ void Elevator::up_stops()
 		set_level(ele_up.front_value()[FLOOR]);
 		last_floor_up = { ele_up.front_value()[FLOOR], ele_up.front_value()[DIRECTION], ele_up.front_value()[TIME] };
 		set_direction(true);
+		setLeaving(true);
 		ele_up.pop_front();
 	}
 
@@ -104,6 +114,8 @@ void Elevator::down_stops()
 		set_level(ele_down.front_value()[FLOOR]);
 		last_floor_down = { ele_down.front_value()[FLOOR], ele_down.front_value()[DIRECTION], ele_down.front_value()[TIME] };
 		set_direction(false);
+		setLeaving(true);
+		if (DEBUG == YES)
 		ele_down.pop_front();
 	}
 
