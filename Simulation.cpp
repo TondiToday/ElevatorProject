@@ -11,6 +11,7 @@ void simulation(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int
 {
 
 	srand(unsigned(time(0))); // set random seed, need to leave in main
+	srand(time(NULL));
 
 	int totalUsers = 0;
 	int totalFloorRequests = 0;

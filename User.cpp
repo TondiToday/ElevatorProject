@@ -15,16 +15,24 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 	if (current_direction == DOWN) // if elevator is going 'down'
 	{
 		cout << "EVENT 1" << endl;
-		userDestination = randomFloor(current_floor - 1, 0);
+		userDestination = randomFloor(current_floor, 1);
 		return userDestination;
 	}
 
-	else if (current_direction == UP) // if elevator is going 'up'
+	else if (current_direction == UP)  // if elevator is going 'up'
 	{
 		cout << "EVENT 2" << endl;
 		// generates floor requests from above current floor to top floor
-		userDestination = randomFloor(number_of_floors , current_floor + 1);
+		userDestination = randomFloor(number_of_floors , current_floor );
 		return userDestination;
+	}
+	else if (current_direction == -1)
+	{
+		cout << "EVENT 3" << endl;
+		// generates floor requests from above current floor to top floor
+		userDestination = randomFloor(number_of_floors, 1);
+		return userDestination;
+	}
 	}
 
 	/*if (userDestination == NULL)
@@ -32,7 +40,7 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 		return userDestination;
 
 	}*/
-}
+
 
 
 
@@ -48,6 +56,7 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 	{
 		user_number++;
 		User* newUser = new User(current_floor, current_direction, number_of_floors, user_number);
+		newUser->generateUserRequests(current_floor, current_direction, number_of_floors);
 		newRequests.push_back(newUser);
 	}
 	return newRequests;

@@ -72,13 +72,24 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			vector<User*> users = generateUsers((*el)->get_level(), (*el)->ele_down.front_value()[DIRECTION], number_of_floors, total_users);
 			printUserStatus(users);
 
-			vector<int> userRequests = { (*el)->ele_down.front_value()[FLOOR], (*el)->ele_down.front_value()[DIRECTION], number_of_floors, total_users };
+			vector<int> userRequests;
 
 			waiting_times.push_back(current_time - (*el)->ele_down.front_value()[TIME]); // add waiting time to vector
 
 			for (int index = 0; index < users.size(); index++)
 			{
-				(*el)->ele_down.push_down(userRequests);
+				users[index]->set_userDestination(userInputToConstant((*el)->get_level()), userInputToConstant(0), number_of_floors);
+				userRequests.push_back(users[index]->get_userDestination());
+				if (userRequests[0] < (*el)->get_level()) {
+
+
+					(*el)->ele_down.push_down(userRequests);
+				}
+				else if (userRequests[0] > (*el)->get_level()) {
+					(*el)->ele_up.push_up(userRequests);
+				}
+				else {};
+				userRequests.pop_back();
 
 				if (DEBUG == YES)
 				{
@@ -125,13 +136,28 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			vector<User*> users = generateUsers((*el)->get_level(), (*el)->ele_up.front_value()[DIRECTION], number_of_floors, total_users);
 			printUserStatus(users);
 
-			vector<int> userRequests = { (*el)->ele_up.front_value()[FLOOR], (*el)->ele_up.front_value()[DIRECTION], number_of_floors, total_users };
+			vector<int> userRequests;
 
 			waiting_times.push_back(current_time - (*el)->ele_up.front_value()[TIME]); // add waiting time to vector
 
 			for (int index = 0; index < users.size(); index++)
 			{
-				(*el)->ele_up.push_up(userRequests[index]);
+			
+			
+				users[index]->set_userDestination(userInputToConstant((*el)->get_level()), userInputToConstant(1), number_of_floors);
+				userRequests.push_back(users[index]->get_userDestination());
+				if (userRequests[0] < (*el)->get_level()) {
+
+
+					(*el)->ele_down.push_down(userRequests);
+				}
+				else if (userRequests[0] > (*el)->get_level()) {
+					(*el)->ele_up.push_up(userRequests);
+				}
+				else() {
+
+				};
+				userRequests.pop_back();
 
 				if (DEBUG == YES)
 				{

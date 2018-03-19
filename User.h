@@ -28,7 +28,9 @@ public:
 	int get_userDestination() {
 		return userDestination;
 	}
-
+	void set_userDestination(int current_floor, int current_direction, const int& number_of_floors) {
+		userDestination = generateUserRequests(current_floor, current_direction, number_of_floors);
+	}
 	
 
 	int generateUserRequests(int& current_floor, int& current_direction, const int& number_of_floors);
