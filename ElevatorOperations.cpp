@@ -44,7 +44,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			(*el)->last_floor_down = { -1, -1, -1 };
 			(*el)->last_floor_up = { -1, -1, -1 };
 	
-			};
+		
 		}
 	
 
