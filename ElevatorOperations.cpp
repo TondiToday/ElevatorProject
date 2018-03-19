@@ -36,7 +36,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			if (DEBUG == YES)
 			{
 				cout << endl;
-				cout << "***ELEVATOR are Boarding***" << endl;
+				cout << "***ELEVATOR Passengers are Boarding***" << endl;
 				cout << endl;
 			}
 			(*el)->setBoarding(false);
