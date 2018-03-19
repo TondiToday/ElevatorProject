@@ -24,6 +24,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 		else if ((*el)->get_level() == number_of_floors) {
 			(*el)->set_direction(false);
 		}
+	
 
 
 
@@ -42,8 +43,6 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			(*el)->last_floor_down = { -1, -1, -1 };
 			(*el)->last_floor_up = { -1, -1, -1 };
 		}
-	
-		
 
 		// if the elevator is moving DOWN, and a floor request matches the current floor
 		else if (((*el)->last_floor_down[DIRECTION] != -1) && (
@@ -95,7 +94,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			// Delete users vector (dynamic memory)
 			deleteVector(users);
 
-			(*el)->ele_down.pop_front(); // removes request from the queue
+			//(*el)->ele_down.pop_front(); // removes request from the queue
 
 			(*el)->setBoarding(true);
 		}
@@ -162,6 +161,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 		
 // ELEVATOR MOVEMENT LOGIC //
 
+//FORCE ELEVATOR OFF LOOPS ON TOP OR BOTTOM FLOOR CAUSING PROGRAM TO CRASH
 		else if ((*el)->get_level() == number_of_floors) {
 			(*el)->ele_up.pop();
 			(*el)->set_direction(DOWN);

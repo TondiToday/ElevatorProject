@@ -47,7 +47,7 @@ int* floorRequest(const int& number_of_floors)
 		if (floorDirection == DOWN) 
 		{
 			// generates floor requests from below current floor to bottom floor
-			floorNumber = randomFloor(currentFloor - 1, 0);
+			floorNumber = randomFloor(currentFloor - 1, 1);
 		}
 
 
