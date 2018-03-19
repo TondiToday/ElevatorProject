@@ -43,27 +43,10 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			(*el)->setBoarding(false);
 			(*el)->last_floor_down = { -1, -1, -1 };
 			(*el)->last_floor_up = { -1, -1, -1 };
-			if ((*el)->isLeaving() == true) 
-			{
-				if (DEBUG == YES)
-				{
-					cout << endl;
-					cout << "***ELEVATOR Passengers are Leaving***" << endl;
-					cout << endl;
-				}
-				(*el)->setLeaving(false);
+	
 			};
 		}
-		else if ((*el)->isLeaving() == true)
-		{
-			if (DEBUG == YES)
-			{
-				cout << endl;
-				cout << "***ELEVATOR Passengers are Leaving***" << endl;
-				cout << endl;
-			}
-			(*el)->setLeaving(false);
-		}
+	
 
 		// if the elevator is moving DOWN, and a floor request matches the current floor
 		else if (((*el)->last_floor_down[DIRECTION] != -1) && (
