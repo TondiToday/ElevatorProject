@@ -149,42 +149,50 @@ const int setElevatorNumbers(const int FLOORS_NUMBER)
 
 const int setSimTime(const int FLOORS_NUMBER, const int ELEVATORS_NUMBER)
 {
+	bool repeat = true;
+	string user_input;
 	int userSimTime; // for loop iterations
 
-	while (true)
+	while (repeat)
 	{
 		cout << "Please enter simulation time in iterations: ";
-		cin >> userSimTime;
+		cin >> user_input;
 
-		if (userSimTime < 100)
+		for (int i = 0; i < user_input.length(); i++)
 		{
-			cout << "A sim time of at least 100 is recommended." << endl;
-			cout << "Consider a sim time of " << (FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 << " iterations. " << "Ignore: Y/N: ";
-			string user_input;
-			cin >> user_input;
-
-			if (toupper(user_input[0]) == 'Y')
-			{
-				break;
-			}
-			else if (toupper(user_input[0]) == 'N')
-			{
-				continue;
-			}
-			else
+			if (!isdigit(user_input[i]))
 			{
 				cout << "Invalid input." << endl;
 				continue;
 			}
-		}
-		else if (isalpha(userSimTime))
-		{
-			cout << "Invalid input." << endl;
-			continue;
-		}
-		else
-		{
-			break;
+			userSimTime = stoi(user_input);
+			if (userSimTime < 100)
+			{
+				cout << "A sim time of at least 100 is recommended." << endl;
+				cout << "Consider a sim time of " << (FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 << " iterations. " << "Ignore: Y/N: ";
+				string user_input;
+				cin >> user_input;
+
+				if (toupper(user_input[0]) == 'Y')
+				{
+					repeat = false;
+					break;
+				}
+				else if (toupper(user_input[0]) == 'N')
+				{
+					continue;
+				}
+				else
+				{
+					cout << "Invalid input." << endl;
+					continue;
+				}
+			}
+			else
+			{
+				repeat = false;
+				break;
+			}
 		}
 	}
 	const int SIM_TIME = userInputToConstant(userSimTime);
