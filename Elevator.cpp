@@ -73,6 +73,7 @@ bool Elevator::is_stationary()
 	else
 		return false;
 }
+//Allows us to move the elevator up one floor per iteration
 void Elevator::up_stops()
 {
 	if (DEBUG == YES)
@@ -97,6 +98,7 @@ void Elevator::up_stops()
 
 
 }
+//Allows us to move the elevator down one floor per iteration
 void Elevator::down_stops()
 {
 	if (DEBUG == YES)

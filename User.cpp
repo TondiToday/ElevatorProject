@@ -35,8 +35,7 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 
 
 
-// Creates a vector of User objects to be passed to the elevator's list
-	
+// Creates a vector of User objects to be passed to the elevator's list	
  vector<User*> generateUsers(int current_floor, int& current_direction, const int& number_of_floors, int& user_number)
  {
 	int numberOfRequests = 1 + rand() % 10; // 1 to 10 requests

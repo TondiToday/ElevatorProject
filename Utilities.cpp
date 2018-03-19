@@ -10,38 +10,14 @@ bool DEBUG; // global debug variable
 void setDebug() 
 {
 	DEBUG = YES;
-	/*
-	string user_input;
-
-	while (true)
-	{
-		cout << "Display debug statements: Y/N: ";
-		cin >> user_input;
-
-		if (toupper(user_input[0]) == 'Y')
-		{
-			DEBUG = true;
-			break;
-		}
-		else if (toupper(user_input[0]) == 'N')
-		{
-			DEBUG = false;
-			break;
-		}
-		else
-		{
-			cout << "Invalid input." << endl;
-			continue;
-		}
-	}
-	cout << endl;*/
+	
 	if (DEBUG == YES)
 	{
 		cout << "Debug statements: " << boolalpha << DEBUG << endl << endl;
 	}
 }
 
-
+// Display Simulation Building Floor options and set
 const int setFloorNumbers()
 {
 	bool repeat = true;
@@ -103,7 +79,7 @@ const int setFloorNumbers()
 }
 
 
-
+// Display Simulation Elevator options and set
 const int setElevatorNumbers(const int FLOORS_NUMBER)
 {
 	bool repeat = true;
@@ -160,7 +136,7 @@ const int setElevatorNumbers(const int FLOORS_NUMBER)
 	return ELEVATORS_NUMBER;
 }
 
-
+//Display Simulation time options for users and set
 const int setSimTime(const int FLOORS_NUMBER, const int ELEVATORS_NUMBER)
 {
 	bool repeat = true;
@@ -223,9 +199,10 @@ const int userInputToConstant(int user_input)
 	return USER_INPUT_CONSTANT;
 }
 
+// Delete elevator vector (dynamic memory)
 void deleteVector(vector<Elevator*> discarded_elevators)
 {
-	// Delete elevator vector (dynamic memory)
+	
 	while (!discarded_elevators.empty())
 	{
 		if (DEBUG == YES)
@@ -238,9 +215,10 @@ void deleteVector(vector<Elevator*> discarded_elevators)
 	}
 }
 
+// Delete users vector (dynamic memory)
 void deleteVector(vector<User*> discarded_users)
 {
-	// Delete users vector (dynamic memory)
+	
 	while (!discarded_users.empty())
 	{
 		if (DEBUG == YES)
@@ -253,7 +231,7 @@ void deleteVector(vector<User*> discarded_users)
 	}
 }
 
-
+//Print Elevator Debug Statuses
 void printElevatorStatus(Elevator*& elevator_obj, int direction)
 {
 	if (DEBUG == YES)
@@ -277,7 +255,7 @@ void printElevatorStatus(Elevator*& elevator_obj, int direction)
 	}
 
 }
-
+//Print User Debug Status
 void printUserStatus(vector<User*>& users_vector)
 {
 	if (DEBUG == YES)
@@ -291,6 +269,7 @@ void printUserStatus(vector<User*>& users_vector)
 	}	
 }
 
+//Find a random floor
 int randomFloor(int max, int min)
 {
 	if ((max - min + 1) == 0)
@@ -310,15 +289,8 @@ int randomFloor(int max, int min)
 		};
 	}
 }
-/*
-int randomFloor(int max, int min)
-{
 
-	int num = (min + (rand() % (int)(max - min + 1)));
-	return num;
-}
-*/
-
+//Determine the average waiting time of Floor Requests
 double averageWaitingTime(vector<int>& waiting_times, int& total_users)
 {
 	if (total_users == 0)
@@ -335,6 +307,7 @@ double averageWaitingTime(vector<int>& waiting_times, int& total_users)
 	return sum_of_waiting_times / total_users;
 }
 
+//Display Simulations Statitstics
 void displayStatistics(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int& SIM_TIME,
 	int& total_users, vector<int>& user_waiting_times)
 {

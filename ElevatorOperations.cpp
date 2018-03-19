@@ -3,8 +3,9 @@
 #include "Utilities.h"
 #include "User.h"
 
-// need to pass in floor request, if the elevator is at that floor and was the elevator dispatched to that floor
-// not all elevators stops are due to a floor request 
+
+/*Function to Control to Operations of the Elevator  
+ movement decisons User operations are made here*/
 
 
 void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_users, int& current_time, vector<int>& waiting_times)
@@ -30,7 +31,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 // USER BOARDING LOGIC //
 
-		// if the elevator is stationary and has no floor requests
+		// Checks to See if Users are Boarding and Leaving in that Precedence order
 		if ((*el)->isBoarding() == true)
 		{
 			if (DEBUG == YES)
@@ -47,7 +48,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 				if (DEBUG == YES)
 				{
 					cout << endl;
-					cout << "***ELEVATOR Passengers are Boarding***" << endl;
+					cout << "***ELEVATOR Passengers are Leaving***" << endl;
 					cout << endl;
 				}
 				(*el)->setLeaving(false);
@@ -109,11 +110,7 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 					cout << "User " << users[index]->get_UserID() << " entered Elevator " << (*el)->get_name() << endl;
 				}
 			}
-
-			// Delete users vector (dynamic memory)
 			deleteVector(users);
-
-			//(*el)->ele_down.pop_front(); // removes request from the queue
 
 			(*el)->setBoarding(true);
 		}
@@ -167,19 +164,14 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			}
 
 			(*el)->ele_up.pop_front(); // removes request from the queue
-
-			// Delete users vector (dynamic memory)
 			deleteVector(users);
 
-			//(*el)->up_stops();
-			//cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 			(*el)->setBoarding(true);
 		}
 
 		
 // ELEVATOR MOVEMENT LOGIC //
 
-//FORCE ELEVATOR OFF LOOPS ON TOP OR BOTTOM FLOOR CAUSING PROGRAM TO CRASH
 		else if ((*el)->get_level() == number_of_floors) {
 			(*el)->ele_up.pop();
 			(*el)->set_direction(DOWN);
@@ -222,9 +214,10 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 }
 
 
+// Calculates elevators' distances from requested floor
 void calculateDistance(vector<Elevator*>& elevators, int task)
 {
-	// Calculates elevators' distances from requested floor
+	
 	for (int index = 0; index < elevators.size(); index++)
 	{
 		elevators[index]->set_distanceFromRequest(task);
