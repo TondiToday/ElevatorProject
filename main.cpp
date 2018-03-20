@@ -24,6 +24,6 @@ int main()
 		const int SIM_TIME = setSimTime(FLOORS_NUMBER, ELEVATORS_NUMBER);
 		simulation(FLOORS_NUMBER, ELEVATORS_NUMBER, SIM_TIME);
 	}
-
+	 
 	return 0;
 }
