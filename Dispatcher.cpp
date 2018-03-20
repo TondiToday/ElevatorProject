@@ -2,7 +2,7 @@
 #include "Dispatcher.h"
 #include "Utilities.h"
 
-
+	/*Function determines which elevators sent to each request*/
 	void dispatch(vector<Elevator*>& d_elevators, int& direction, int& floor_request, int& current_time)
 	{
 		// assign job to elevator
@@ -33,7 +33,7 @@
 		resetElevatorStatus(d_elevators);
 	}
 
-	
+	/*This function finds the best Elevator for each request according to our predetermined logic*/
 	Elevator* findBestElevator(vector<Elevator*> elevators, int& direction, int& floor_request)
 	{	// elevators must be passed by value because it will modified later!
 
@@ -263,7 +263,8 @@
 
 	}
 
-
+	/*This function calculates which elevator to send if all the Elevators have been marked
+	bad with the findBestElevator function*/
 	Elevator* ElevatorWorstCase(vector<Elevator*>& elevators, int& direction, int& floor_request)
 	{
 		// Create a vector of total distance elevator would need to travel based on the number of jobs
@@ -315,7 +316,7 @@
 		return elevators[index_WorstCase];
 	}
 
-
+	//This function removes the determined Bad Elevators
 	int dismissBadElevators(vector<Elevator*>& d_elevators)
 	{
 		if (DEBUG == YES)
