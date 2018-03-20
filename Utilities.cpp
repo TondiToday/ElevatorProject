@@ -45,7 +45,7 @@ void setDebug()
 		cout << "Debug statements disabled" << endl << endl;
 	}
 }
-
+// Display Default settings and set
 bool useDefault()
 {
 	string user_input;
@@ -146,7 +146,6 @@ const int setFloorNumbers()
 	const int FLOORS_NUMBER = userInputToConstant(userBuildingFloors);
 	return FLOORS_NUMBER;
 }
-
 
 
 // Display Simulation Elevator Number options and set
@@ -389,7 +388,7 @@ void displayStatistics(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, co
 	float avgWaitTime = averageWaitingTime(user_waiting_times, total_users);
 
 	cout << endl;
-	cout << "Simulation complete." << endl;
+	cout << "Simulation complete" << endl;
 	cout << "Simulation time: " << SIM_TIME << " iterations or " 
 		<< setprecision(2) <<  (SIM_TIME * 10) / 60 << " minutes " << endl;
 	cout << "Number of floors: " << FLOORS_NUMBER << endl;
@@ -398,5 +397,5 @@ void displayStatistics(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, co
 	cout << "Average waiting time: " << avgWaitTime <<
 		" iterations or " << setprecision(2) << (avgWaitTime * 10) / 60 << " minute(s)" << endl << endl;
 	cout << "*Waiting time refers to the time from a floor request to the elevator arriving to "
-		"pick up users." << endl;
+		"pick up users." << endl << endl << endl;
 }
