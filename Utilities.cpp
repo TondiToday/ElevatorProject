@@ -10,31 +10,7 @@ bool DEBUG; // global debug variable
 void setDebug() 
 {
 	DEBUG = NO;
-	/*
-	string user_input;
-
-	while (true)
-	{
-		cout << "Display debug statements: Y/N: ";
-		cin >> user_input;
-
-		if (toupper(user_input[0]) == 'Y')
-		{
-			DEBUG = true;
-			break;
-		}
-		else if (toupper(user_input[0]) == 'N')
-		{
-			DEBUG = false;
-			break;
-		}
-		else
-		{
-			cout << "Invalid input." << endl;
-			continue;
-		}
-	}
-	cout << endl;*/
+	
 	if (DEBUG == YES)
 	{
 		cout << "Debug statements: " << boolalpha << DEBUG << endl << endl;
@@ -310,14 +286,6 @@ int randomFloor(int max, int min)
 		};
 	}
 }
-/*
-int randomFloor(int max, int min)
-{
-
-	int num = (min + (rand() % (int)(max - min + 1)));
-	return num;
-}
-*/
 
 double averageWaitingTime(vector<int>& waiting_times, int& total_users)
 {

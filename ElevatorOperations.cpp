@@ -3,10 +3,8 @@
 #include "Utilities.h"
 #include "User.h"
 
-// need to pass in floor request, if the elevator is at that floor and was the elevator dispatched to that floor
-// not all elevators stops are due to a floor request 
 
-
+/*Main function for calucation elevator operations For users logic and elevator movement*/
 void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_users, int& current_time, vector<int>& waiting_times)
 {
 	vector<Elevator*>::iterator el;
@@ -203,10 +201,10 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 	}
 }
 
-
+// Calculates elevators' distances from requested floor
 void calculateDistance(vector<Elevator*>& elevators, int task)
 {
-	// Calculates elevators' distances from requested floor
+	
 	for (int index = 0; index < elevators.size(); index++)
 	{
 		elevators[index]->set_distanceFromRequest(task);

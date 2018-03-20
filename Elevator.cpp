@@ -64,6 +64,7 @@ bool Elevator::is_stationary()
 	else
 		return false;
 }
+//function to move elevator up one floor
 void Elevator::up_stops()
 {
 	if (DEBUG == YES)
@@ -87,6 +88,7 @@ void Elevator::up_stops()
 
 
 }
+//function to move elevator down 1 floor
 void Elevator::down_stops()
 {
 	if (DEBUG == YES)

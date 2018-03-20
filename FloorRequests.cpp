@@ -62,15 +62,12 @@ int* floorRequest(const int& number_of_floors)
 	if (floorDirection == 0 && floorNumber == 0)
 	{
 		floorDirection = 1;
-		//cout << "Floor direction and number are both 0." << endl;
-		//throw exception();
 	}
 
 
 	// Add to array
 	newFloorRequest[DIRECTION_REQUEST] = floorDirection;
 	newFloorRequest[FLOOR_REQUEST] = floorNumber;
-	//newFloorRequest[DIRECTION] = 0;
 
 	return newFloorRequest;
 }
