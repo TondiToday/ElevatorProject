@@ -230,7 +230,7 @@ void deleteVector(vector<User*> discarded_users)
 	}
 }
 
-
+//Print Elevator Debug Statuses
 void printElevatorStatus(Elevator*& elevator_obj, int direction)
 {
 	if (DEBUG == YES)
@@ -255,6 +255,7 @@ void printElevatorStatus(Elevator*& elevator_obj, int direction)
 
 }
 
+//Print User Debug Statuses
 void printUserStatus(vector<User*>& users_vector)
 {
 	if (DEBUG == YES)
@@ -268,6 +269,8 @@ void printUserStatus(vector<User*>& users_vector)
 	}	
 }
 
+
+//Pick Random Floor
 int randomFloor(int max, int min)
 {
 	if ((max - min + 1) == 0)
@@ -288,6 +291,7 @@ int randomFloor(int max, int min)
 	}
 }
 
+//Calculate average waiting time for floor requests
 double averageWaitingTime(vector<int>& waiting_times, int& total_users)
 {
 	if (total_users == 0)
@@ -303,6 +307,8 @@ double averageWaitingTime(vector<int>& waiting_times, int& total_users)
 	}
 	return sum_of_waiting_times / total_users;
 }
+
+
 
 void displayStatistics(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int& SIM_TIME,
 	int& total_users, vector<int>& user_waiting_times)
