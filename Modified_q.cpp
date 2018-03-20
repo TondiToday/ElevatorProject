@@ -5,15 +5,21 @@ q_modified::q_modified()
 {
 	size = 0;
 }
+
+//Gets the size of the modified q
 int q_modified::getsize()
 {
 	return size;
 }
+
+//Returns whether the modified q is empty
 bool q_modified::isempty()
 {
 
 	return (front == NULL);
 }
+
+//add element to a UP modified q
 void q_modified::push_up(vector<int> x)
 {
 	if (isempty())
@@ -67,6 +73,8 @@ void q_modified::push_up(vector<int> x)
 	}
 
 }
+
+//add element to a DOWN modified q
 void q_modified::push_down(vector<int> x)
 {
 	if (isempty())
@@ -119,6 +127,8 @@ void q_modified::push_down(vector<int> x)
 	}
 
 }
+
+//Print the content of a modified q
 int q_modified::print()
 {
 	if (!isempty())
@@ -141,6 +151,9 @@ int q_modified::print()
 	}
 
 }
+
+
+//Remove all the elements of a modified q
 void q_modified::pop()
 {
 	while (front != NULL)
@@ -152,6 +165,8 @@ void q_modified::pop()
 	}
 
 }
+
+//Returns the back value of the modified queue
 vector<int> q_modified::back_value()
 {
 	if (!isempty())
@@ -164,6 +179,8 @@ vector<int> q_modified::back_value()
 		return temp;
 	}
 }
+
+//Returns the front value of the modified queue
 vector<int> q_modified::front_value()
 {
 	if (!isempty())
@@ -178,7 +195,7 @@ vector<int> q_modified::front_value()
 
 }
 
-
+//Removes the front value of the modified q
 void q_modified::pop_front()
 {
 	if (!isempty())
