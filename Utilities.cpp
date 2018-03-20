@@ -17,7 +17,7 @@ void setDebug()
 	}
 }
 
-
+// Display Simulation Building Floor options and set
 const int setFloorNumbers()
 {
 	bool repeat = true;
@@ -79,7 +79,7 @@ const int setFloorNumbers()
 }
 
 
-
+// Display Simulation Elevator Number options and set
 const int setElevatorNumbers(const int FLOORS_NUMBER)
 {
 	bool repeat = true;
@@ -136,7 +136,7 @@ const int setElevatorNumbers(const int FLOORS_NUMBER)
 	return ELEVATORS_NUMBER;
 }
 
-
+// Display Simulation Sim Times options and set
 const int setSimTime(const int FLOORS_NUMBER, const int ELEVATORS_NUMBER)
 {
 	bool repeat = true;
@@ -199,9 +199,10 @@ const int userInputToConstant(int user_input)
 	return USER_INPUT_CONSTANT;
 }
 
+// Delete elevator vector (dynamic memory)
 void deleteVector(vector<Elevator*> discarded_elevators)
 {
-	// Delete elevator vector (dynamic memory)
+
 	while (!discarded_elevators.empty())
 	{
 		if (DEBUG == YES)
@@ -214,9 +215,9 @@ void deleteVector(vector<Elevator*> discarded_elevators)
 	}
 }
 
+// Delete users vector (dynamic memory)
 void deleteVector(vector<User*> discarded_users)
 {
-	// Delete users vector (dynamic memory)
 	while (!discarded_users.empty())
 	{
 		if (DEBUG == YES)
