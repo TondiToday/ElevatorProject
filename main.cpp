@@ -5,6 +5,12 @@
 
 using namespace std;
 
+/*This is the main simulation for the Elevator
+
+IF you want to turn DEBUG mode off, go the Uitilities.cpp and change:
+DEBUG = NO;
+in setDebug()
+*/
 
 int main()
 {	
