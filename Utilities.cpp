@@ -308,8 +308,7 @@ double averageWaitingTime(vector<int>& waiting_times, int& total_users)
 	return sum_of_waiting_times / total_users;
 }
 
-
-
+//Display Simulations Statitstics
 void displayStatistics(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int& SIM_TIME,
 	int& total_users, vector<int>& user_waiting_times)
 {
