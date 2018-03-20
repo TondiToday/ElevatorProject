@@ -37,7 +37,7 @@ int User::generateUserRequests(int& current_floor, int& current_direction, const
 	
  vector<User*> generateUsers(int current_floor, int& current_direction, const int& number_of_floors, int& user_number)
  {
-	int numberOfRequests = 1 + rand() % 10; // 1 to 10 requests
+	int numberOfRequests = 1 + rand() % 4; // 1 to 4 requests (User objects to be generated)
 	vector<User*> newRequests;
 
 	for (int i = 0; i < numberOfRequests; i++)

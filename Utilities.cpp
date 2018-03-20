@@ -107,45 +107,46 @@ const int setFloorNumbers()
 				cout << "Invalid input." << endl;
 				continue;
 			}
-			userBuildingFloors = stoi(user_input);
+		}
+		userBuildingFloors = stoi(user_input);
 
-			if (userBuildingFloors > 20)
-			{
-				cout << "More than 20 floors requires a longer simulation running time to work properly. "
-					"Ignore: Y/N: ";
-				string user_input;
-				cin >> user_input;
+		if (userBuildingFloors > 20)
+		{
+			cout << "More than 20 floors requires a longer simulation running time to work properly. "
+				"Ignore: Y/N: ";
+			string user_input;
+			cin >> user_input;
 
-				if (toupper(user_input[0]) == 'Y')
-				{
-					repeat = false;
-					break;
-				}
-				else if (toupper(user_input[0]) == 'N')
-				{
-					continue;
-				}
-				else
-				{
-					cout << "Invalid input." << endl;
-					continue;
-				}
-			}
-			else if (userBuildingFloors < 2)
-			{
-				cout << "At least two floors are required." << endl;
-				continue;
-			}
-			else
+			if (toupper(user_input[0]) == 'Y')
 			{
 				repeat = false;
 				break;
 			}
-		}	
-	}
+			else if (toupper(user_input[0]) == 'N')
+			{
+				continue;
+			}
+			else
+			{
+				cout << "Invalid input." << endl;
+				continue;
+			}
+		}
+		else if (userBuildingFloors < 2)
+		{
+			cout << "At least two floors are required." << endl;
+			continue;
+		}
+		else
+		{
+			repeat = false;
+			break;
+		}
+	}	
 	const int FLOORS_NUMBER = userInputToConstant(userBuildingFloors);
 	return FLOORS_NUMBER;
 }
+
 
 
 // Display Simulation Elevator Number options and set
@@ -167,38 +168,38 @@ const int setElevatorNumbers(const int FLOORS_NUMBER)
 				cout << "Invalid input." << endl;
 				continue;
 			}
-			userElevatorNumber = stoi(user_input);
+		}
+		userElevatorNumber = stoi(user_input);
 
-			// floor to elevator ratio should be 2:1 or 2.5:1
-			float floorToElevatorRatio = FLOORS_NUMBER / userElevatorNumber;
+		// floor to elevator ratio should be 2:1 or 2.5:1
+		float floorToElevatorRatio = FLOORS_NUMBER / userElevatorNumber;
 
-			if ((floorToElevatorRatio < 2) || (floorToElevatorRatio > 2.5))
-			{
-				cout << "A floor to elevator ratio of 2:1 or 2.5:1 will provide more realistic results." << endl;
-				cout << "Consider using " << ceil(FLOORS_NUMBER / 2.5) << " elevators. " << "Ignore: Y/N: ";
-				string user_input;
-				cin >> user_input;
+		if ((floorToElevatorRatio < 2) || (floorToElevatorRatio > 2.5))
+		{
+			cout << "A floor to elevator ratio of 2:1 or 2.5:1 will provide more realistic results." << endl;
+			cout << "Consider using " << ceil(FLOORS_NUMBER / 2.5) << " elevators. " << "Ignore: Y/N: ";
+			string user_input;
+			cin >> user_input;
 
-				if (toupper(user_input[0]) == 'Y')
-				{
-					repeat = false;
-					break;
-				}
-				else if (toupper(user_input[0]) == 'N')
-				{
-					continue;
-				}
-				else
-				{
-					cout << "Invalid input." << endl;
-					continue;
-				}
-			}
-			else
+			if (toupper(user_input[0]) == 'Y')
 			{
 				repeat = false;
 				break;
 			}
+			else if (toupper(user_input[0]) == 'N')
+			{
+				continue;
+			}
+			else
+			{
+				cout << "Invalid input." << endl;
+				continue;
+			}
+		}
+		else
+		{
+			repeat = false;
+			break;
 		}
 	}
 	const int ELEVATORS_NUMBER = userInputToConstant(userElevatorNumber);
@@ -214,7 +215,7 @@ const int setSimTime(const int FLOORS_NUMBER, const int ELEVATORS_NUMBER)
 
 	while (repeat)
 	{
-		cout << "Please enter simulation time in iterations: ";
+		cout << "Please enter simulation time in iterations (60 iterations = 10 minutes): ";
 		cin >> user_input;
 
 		for (int i = 0; i < user_input.length(); i++)
@@ -224,38 +225,38 @@ const int setSimTime(const int FLOORS_NUMBER, const int ELEVATORS_NUMBER)
 				cout << "Invalid input." << endl;
 				continue;
 			}
-			userSimTime = stoi(user_input);
-			if (userSimTime < 100)
-			{
-				cout << "A sim time of at least 100 is recommended." << endl;
-				cout << "Consider a sim time of " << (FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 << " iterations " 
-					<< "or " << (((FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 ) * 10 ) / 60 << " minutes. "
-					<< "Ignore: Y/N: ";
-				string user_input;
-				cin >> user_input;
+		}
+		userSimTime = stoi(user_input);
+		if (userSimTime < 100)
+		{
+			cout << "A sim time of at least 100 is recommended." << endl;
+			cout << "Consider a sim time of " << (FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 << " iterations " 
+				<< "or " << (((FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 ) * 10 ) / 60 << " minutes. "
+				<< "Ignore: Y/N: ";
+			string user_input;
+			cin >> user_input;
 
-				if (toupper(user_input[0]) == 'Y')
-				{
-					repeat = false;
-					break;
-				}
-				else if (toupper(user_input[0]) == 'N')
-				{
-					continue;
-				}
-				else
-				{
-					cout << "Invalid input." << endl;
-					continue;
-				}
-			}
-			else
+			if (toupper(user_input[0]) == 'Y')
 			{
 				repeat = false;
 				break;
 			}
+			else if (toupper(user_input[0]) == 'N')
+			{
+				continue;
+			}
+			else
+			{
+				cout << "Invalid input." << endl;
+				continue;
+			}
 		}
-	}	
+		else
+		{
+			repeat = false;
+			break;
+		}
+	}
 	const int SIM_TIME = userInputToConstant(userSimTime);
 	return SIM_TIME;
 }
@@ -390,12 +391,12 @@ void displayStatistics(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, co
 	cout << endl;
 	cout << "Simulation complete." << endl;
 	cout << "Simulation time: " << SIM_TIME << " iterations or " 
-		<< setprecision(2) <<  (SIM_TIME * 10) / 60 << " minutes" << endl;
+		<< setprecision(2) <<  (SIM_TIME * 10) / 60 << " minutes " << endl;
 	cout << "Number of floors: " << FLOORS_NUMBER << endl;
 	cout << "Number of elevators: " << ELEVATORS_NUMBER << endl;
 	cout << "Total users: " << total_users << endl;
 	cout << "Average waiting time: " << avgWaitTime <<
-		" iterations or " << setprecision(2) << (avgWaitTime * 10) / 60 << " minutes" << endl << endl;
+		" iterations or " << setprecision(2) << (avgWaitTime * 10) / 60 << " minute(s)" << endl << endl;
 	cout << "*Waiting time refers to the time from a floor request to the elevator arriving to "
 		"pick up users." << endl;
 }
