@@ -69,7 +69,7 @@ void Elevator::up_stops()
 {
 	if (DEBUG == YES)
 	{
-		cout << "\t\t moving up" << endl;
+		cout << "\t\t" << "\t     moving up" << endl;
 	}
 	int new_level = abs(abs(get_level()) + 1);
 	if (abs(get_level() - ele_up.front_value()[FLOOR]) != 1) {
@@ -84,16 +84,14 @@ void Elevator::up_stops()
 		set_direction(true);
 		ele_up.pop_front();
 	}
-
-
-
 }
+
 //function to move elevator down 1 floor
 void Elevator::down_stops()
 {
 	if (DEBUG == YES)
 	{
-		cout << "\t\t moving down" << endl;
+		cout << "\t\t" << "\t     moving down" << endl;
 	}
 	int new_level = abs(abs(get_level()) - 1);
 	if (abs(get_level() - ele_down.front_value()[FLOOR]) != 1) {
@@ -108,8 +106,6 @@ void Elevator::down_stops()
 		set_direction(false);
 		ele_down.pop_front();
 	}
-
-
 }
 
 bool Elevator::get_goodStatus()

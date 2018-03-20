@@ -9,27 +9,27 @@
 /*Main Simulation function*/
 void simulation(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int& SIM_TIME)
 {
-
 	srand(unsigned(time(0))); // set random seed, need to leave in main
-	srand(time(0));
 
 	int totalUsers = 0;
 	int totalFloorRequests = 0;
 	vector <Elevator*> elevators;
 	vector<int> userWaitingTimes;
 
-
-
+	// Create Elevator vector
 	for (int i = 0; i < ELEVATORS_NUMBER; i++)
 	{
 		Elevator* createElevator = new Elevator(i, FLOORS_NUMBER, ELEVATORS_NUMBER);
 		elevators.push_back(createElevator);
 	}
 
-
+	// Start Simulation
 	for (int currentTime = 0; currentTime < SIM_TIME; currentTime++)
 	{
-		cout << endl << "ITERATIONS: " << currentTime << endl;
+		if (DEBUG == YES)
+		{
+			cout << endl << "TIME: " << currentTime << endl;
+		}
 
 		// Get new floor
 		int* newTaskPtr = floorRequest(FLOORS_NUMBER);
@@ -46,7 +46,6 @@ void simulation(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int
 				cout << "No floor request was made." << endl;
 			}
 		}
-
 		else
 		{
 			if (DEBUG == YES)
@@ -60,11 +59,8 @@ void simulation(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int
 			totalFloorRequests++;
 		}
 		elevator_op(elevators, FLOORS_NUMBER, totalUsers, currentTime, userWaitingTimes);
-
-		//system("pause");
 	}
-	deleteVector(elevators);
+	deleteVector(elevators); // deletes vector of dynamically allocated memory
 
 	displayStatistics(FLOORS_NUMBER, ELEVATORS_NUMBER, SIM_TIME, totalUsers, userWaitingTimes);
-	system("pause");
 }

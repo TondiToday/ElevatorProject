@@ -397,6 +397,7 @@
 		return elevator1->get_distanceFromRequest() < elevator2->get_distanceFromRequest();
 	}
 
+
 	void resetElevatorStatus(vector<Elevator*>& elevators)
 	{
 		if (DEBUG == YES)

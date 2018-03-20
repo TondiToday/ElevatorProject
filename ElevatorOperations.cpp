@@ -124,9 +124,6 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 
 
-
-
-
 			vector<User*> users = generateUsers((*el)->get_level(), (*el)->last_floor_up[DIRECTION], number_of_floors, total_users);
 			printUserStatus(users);
 
@@ -151,8 +148,6 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 			// Delete users vector (dynamic memory)
 			deleteVector(users);
 
-			//(*el)->up_stops();
-			//cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
 			(*el)->setBoarding(true);
 		}
 
@@ -173,23 +168,43 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 
 		}
 		else if ((*el)->ele_down.getsize() == 0 && (*el)->ele_up.getsize() == 0) {
-			cout << "initial condition" << endl;
+			
+			if (DEBUG == YES)
+			{
+				cout << "\t\t Elevator " << (*el)->get_name() << "\t\t idle" << endl;
+			}
 		}
 		else if ((*el)->ele_down.getsize() != 0 && (*el)->ele_up.getsize() == 0) {
 			(*el)->down_stops();
-			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			
+			if (DEBUG == YES)
+			{
+				cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			}
 		}
 		else if ((*el)->ele_down.getsize() == 0 && (*el)->ele_up.getsize() != 0) {
 			(*el)->up_stops();
-			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			
+			if (DEBUG == YES)
+			{
+				cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			}
 		}
 		else if ((*el)->ele_up.getsize() != 0 && (*el)->moving_up() == true) {
 			(*el)->up_stops();
-			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+
+			if (DEBUG == YES)
+			{
+				cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			}
 		}
 		else if ((*el)->ele_down.getsize() != 0 && (*el)->moving_up() == false) {
 			(*el)->down_stops();
-			cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+
+			if (DEBUG == YES)
+			{
+				cout << "\t\t Elevator " << (*el)->get_name() << "\t\t on floor " << (*el)->get_level() << endl;
+			}
 		}
 		else if ((*el)->ele_up.getsize() != 0 && (*el)->moving_up() == false) {
 			(*el)->set_direction(true);
@@ -197,7 +212,12 @@ void elevator_op(vector<Elevator*> &v, const int& number_of_floors, int& total_u
 		else if ((*el)->ele_down.getsize() != 0 && (*el)->moving_up() == true) {
 			(*el)->set_direction(false);
 		}
-		else { cout << "Nothing happend " << endl; }
+		else { 
+			if (DEBUG == YES)
+			{
+				cout << "Nothing happend " << endl;
+			}
+		}
 	}
 }
 

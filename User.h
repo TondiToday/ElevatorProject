@@ -29,6 +29,7 @@ public:
 		return userDestination;
 	}
 	
+	// Generates random User floor requests based on the current floor, number of floors, and direction
 	int generateUserRequests(int& current_floor, int& current_direction, const int& number_of_floors);
 	
 	private :
@@ -37,6 +38,7 @@ public:
 	int userDestination;
 };
 
+	// Generates a between 1 and 10 users
 	vector<User*> generateUsers(int current_floor, int& current_direction, const int& number_of_floors, int& user_number);
 	
 	

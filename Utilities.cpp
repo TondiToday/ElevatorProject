@@ -3,19 +3,90 @@
 #include "User.h"
 #include "time.h"
 #include <iostream>
+#include <iomanip>
 
 bool DEBUG; // global debug variable
 
 // Set whether debug statements are displayed
 void setDebug() 
 {
-	DEBUG = NO;
+	//DEBUG = YES;
+		
+	string user_input;
+
+	while (true)
+	{
+		cout << "Display debug statements: Y/N: ";
+		cin >> user_input;
+
+		if (toupper(user_input[0]) == 'Y')
+		{
+			DEBUG = true;
+			break;
+		}
+		else if (toupper(user_input[0]) == 'N')
+		{
+			DEBUG = false;
+			break;
+		}
+		else
+		{
+			cout << "Invalid input." << endl;
+			continue;
+		}
+	}
 	
 	if (DEBUG == YES)
 	{
-		cout << "Debug statements: " << boolalpha << DEBUG << endl << endl;
+		cout << "Debug statements enabled" << endl << endl;
+	}
+	else
+	{
+		cout << "Debug statements disabled" << endl << endl;
 	}
 }
+
+bool useDefault()
+{
+	string user_input;
+	bool use_default;
+	// Default values
+	cout << "Default values: Floors: 20, Elevators: 8, Time: 720 iterations or 120 minutes" << endl;
+
+	while (true)
+	{
+		cout << "Use default settings: Y/N: ";
+		cin >> user_input;
+
+		if (toupper(user_input[0]) == 'Y')
+		{
+			use_default = YES;
+			break;
+		}
+		else if (toupper(user_input[0]) == 'N')
+		{
+			use_default = NO;
+			break;
+		}
+		else
+		{
+			cout << "Invalid input." << endl;
+			continue;
+		}
+	}
+
+	if (use_default == YES)
+	{
+		cout << "Using default settings" << endl << endl;
+	}
+	else
+	{
+		cout << "Using custom settings" << endl << endl;
+	}
+
+	return use_default;
+}
+
 
 // Display Simulation Building Floor options and set
 const int setFloorNumbers()
@@ -70,9 +141,7 @@ const int setFloorNumbers()
 				repeat = false;
 				break;
 			}
-		}
-		
-		
+		}	
 	}
 	const int FLOORS_NUMBER = userInputToConstant(userBuildingFloors);
 	return FLOORS_NUMBER;
@@ -159,7 +228,9 @@ const int setSimTime(const int FLOORS_NUMBER, const int ELEVATORS_NUMBER)
 			if (userSimTime < 100)
 			{
 				cout << "A sim time of at least 100 is recommended." << endl;
-				cout << "Consider a sim time of " << (FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 << " iterations. " << "Ignore: Y/N: ";
+				cout << "Consider a sim time of " << (FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 << " iterations " 
+					<< "or " << (((FLOORS_NUMBER / ELEVATORS_NUMBER) * 50 ) * 10 ) / 60 << " minutes. "
+					<< "Ignore: Y/N: ";
 				string user_input;
 				cin >> user_input;
 
@@ -191,13 +262,13 @@ const int setSimTime(const int FLOORS_NUMBER, const int ELEVATORS_NUMBER)
 
 
 
-
 // Converts user input to a const int
 const int userInputToConstant(int user_input)
 {
 	const int USER_INPUT_CONSTANT = user_input;
 	return USER_INPUT_CONSTANT;
 }
+
 
 // Delete elevator vector (dynamic memory)
 void deleteVector(vector<Elevator*> discarded_elevators)
@@ -244,7 +315,7 @@ void printElevatorStatus(Elevator*& elevator_obj, int direction)
 		cout << "Distance from requested floor: " << elevator_obj->get_distanceFromRequest() << endl;
 
 		if ((direction == DOWN) && (elevator_obj->moving_up() == true) && (elevator_obj->is_stationary() == false))
-		{
+		{   // Warnings will always occur is all elevators have a bad status
 			cout << "WARNING: Elevator is going the wrong direction!" << endl;
 		}
 		else if ((direction == UP) && (elevator_obj->moving_up() == false) && (elevator_obj->is_stationary() == false))
@@ -273,6 +344,7 @@ void printUserStatus(vector<User*>& users_vector)
 //Pick Random Floor
 int randomFloor(int max, int min)
 {
+	// work-around for divide-by-zero errors
 	if ((max - min + 1) == 0)
 	{
 		int zeroFix = 1;
@@ -292,14 +364,14 @@ int randomFloor(int max, int min)
 }
 
 //Calculate average waiting time for floor requests
-double averageWaitingTime(vector<int>& waiting_times, int& total_users)
+float averageWaitingTime(vector<int>& waiting_times, int& total_users)
 {
 	if (total_users == 0)
 	{
 		return 0;
 	}
 
-	double sum_of_waiting_times = 0;
+	float sum_of_waiting_times = 0;
 
 	for (int i = 0; i < waiting_times.size(); i++)
 	{
@@ -312,14 +384,18 @@ double averageWaitingTime(vector<int>& waiting_times, int& total_users)
 void displayStatistics(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int& SIM_TIME,
 	int& total_users, vector<int>& user_waiting_times)
 {
+	int time_setting = 10; // 10 seconds per iteration
+	float avgWaitTime = averageWaitingTime(user_waiting_times, total_users);
+
 	cout << endl;
 	cout << "Simulation complete." << endl;
-	cout << "Simulation time: " << SIM_TIME << " iterations" << endl;
+	cout << "Simulation time: " << SIM_TIME << " iterations or " 
+		<< setprecision(2) <<  (SIM_TIME * 10) / 60 << " minutes" << endl;
 	cout << "Number of floors: " << FLOORS_NUMBER << endl;
 	cout << "Number of elevators: " << ELEVATORS_NUMBER << endl;
 	cout << "Total users: " << total_users << endl;
-	cout << "Average waiting time: " << averageWaitingTime(user_waiting_times, total_users) << 
-		" iterations" << endl << endl;
-	cout << "Waiting time refers to the time when a floor request to the elevator arriving to "
+	cout << "Average waiting time: " << avgWaitTime <<
+		" iterations or " << setprecision(2) << (avgWaitTime * 10) / 60 << " minutes" << endl << endl;
+	cout << "*Waiting time refers to the time from a floor request to the elevator arriving to "
 		"pick up users." << endl;
 }
