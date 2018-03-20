@@ -63,7 +63,6 @@ void simulation(const int& FLOORS_NUMBER, const int& ELEVATORS_NUMBER, const int
 
 		//system("pause");
 	}
-	// Delete elevator vector (dynamic memory)
 	deleteVector(elevators);
 
 	displayStatistics(FLOORS_NUMBER, ELEVATORS_NUMBER, SIM_TIME, totalUsers, userWaitingTimes);
